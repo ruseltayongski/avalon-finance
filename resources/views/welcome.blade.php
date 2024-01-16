@@ -179,77 +179,6 @@
                       isMobile = window.innerWidth <= 912;
                    });
                 }">
-                {{-- <div class="w-full max-w-[330px] px-4" id="ourLocation">
-                   <div class="w-full mb-12">
-                      <div class="flex">
-                         <div class="mr-6 text-primary h-9 w-9">
-                            <svg
-                               width="32"
-                               height="32"
-                               viewBox="0 0 32 32"
-                               fill="none"
-                               xmlns="http://www.w3.org/2000/svg"
-                               >
-                               <path
-                                  d="M16 0.899902C9.1 0.899902 3.5 6.2999 3.5 12.9499C3.5 17.9999 10.2 25.9999 14.15 30.2999C14.65 30.8499 15.3 31.0999 16 31.0999C16.7 31.0999 17.35 30.7999 17.85 30.2999C21.8 25.9999 28.5 17.9999 28.5 12.9499C28.5 6.2999 22.9 0.899902 16 0.899902ZM16.2 28.7999C16.1 28.8999 15.95 28.8999 15.8 28.7999C10.95 23.4999 5.75 16.5999 5.75 12.9499C5.75 7.5499 10.35 3.1499 16 3.1499C21.65 3.1499 26.25 7.5499 26.25 12.9499C26.25 16.5999 21.05 23.4999 16.2 28.7999Z"
-                                  :fill="isMobile ? 'white' : '#011523'"
-                                  />
-                               <path
-                                  d="M16 7.84985C13 7.84985 10.55 10.2999 10.55 13.2999C10.55 16.2999 13 18.7999 16 18.7999C19 18.7999 21.45 16.3499 21.45 13.3499C21.45 10.3499 19 7.84985 16 7.84985ZM16 16.5499C14.2 16.5499 12.8 15.0999 12.8 13.3499C12.8 11.5999 14.25 10.1499 16 10.1499C17.75 10.1499 19.2 11.5999 19.2 13.3499C19.2 15.0999 17.8 16.5499 16 16.5499Z"
-                                  :fill="isMobile ? 'white' : '#011523'"
-                                  />
-                            </svg>
-                         </div>
-                         <div>
-                            <h5
-                               class="mb-4 text-lg font-medium text-dark dark:text-white"              
-                               :style="isMobile ? 'color: white;' : ''">
-                               Our Location
-                            </h5>
-                            <p class="text-base text-body-color dark:text-dark-6"
-                            
-                            :style="isMobile ? 'color: white;' : ''">
-                            401 Broadway, 24th Floor, Orchard Cloud View, London
-                           </p>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-                <div class="w-full max-w-[330px] px-4" id="whatWeHelp">
-                   <div class="w-full mb-12">
-                      <div class="flex">
-                         <div class="mr-6 text-primary h-9 w-9">
-                            <svg
-                               width="32"
-                               height="32"
-                               viewBox="0 0 32 32"
-                               fill="none"
-                               xmlns="http://www.w3.org/2000/svg"
-                               >
-                               <path
-                                  d="M28 4.80005H4.00001C2.30001 4.80005 0.850006 6.20005 0.850006 7.95005V24.15C0.850006 25.85 2.25001 27.3 4.00001 27.3H28C29.7 27.3 31.15 25.9 31.15 24.15V7.90005C31.15 6.20005 29.7 4.80005 28 4.80005ZM28 7.05005C28.05 7.05005 28.1 7.05005 28.15 7.05005L16 14.85L3.85001 7.05005C3.90001 7.05005 3.95001 7.05005 4.00001 7.05005H28ZM28 24.9501H4.00001C3.50001 24.9501 3.10001 24.55 3.10001 24.05V9.25005L14.8 16.75C15.15 17 15.55 17.1 15.95 17.1C16.35 17.1 16.75 17 17.1 16.75L28.8 9.25005V24.1C28.9 24.6 28.5 24.9501 28 24.9501Z"
-                                  :fill="isMobile ? 'white' : '#011523'"
-                                  />
-                            </svg>
-                         </div>
-                         <div>
-                            <h5
-                               class="mb-4 text-lg font-medium text-dark dark:text-white"
-                               :style="isMobile ? 'color: white;' : ''">
-                               How Can We Help?
-                            </h5>
-                            <p
-                               class="mb-2 text-base text-body-color dark:text-dark-6"
-                               :style="isMobile ? 'color: white;' : ''">
-                               info@yourdomain.com
-                            </p>
-                            <p class="text-base text-body-color dark:text-dark-6" :style="isMobile ? 'color: white;' : ''">
-                               contact@yourdomain.com
-                            </p>
-                         </div>
-                      </div>
-                   </div>
-                </div> --}}
                 <div class="mx-auto px-4 text-center sm:container">
                   <div
                      class="shadow-product dark:shadow-box-dark mx-auto inline-flex justify-center rounded-md bg-white dark:bg-dark-2 py-7 px-5 sm:py-9 sm:px-10"
@@ -260,13 +189,12 @@
                         <div
                            class="relative px-3 text-center sm:px-6 md:px-10 lg:px-[50px]"
                            >
+                           <span class="bg-stroke absolute top-[16px] -right-[45px] 
+                           block h-0.5 w-[90px] sm:-right-[70px] sm:w-[140px] md:-right-[82px] md:w-[137px]"></span>
                            <span
-                              class="bg-primary absolute top-[16px] -right-[45px] block h-0.5 w-[90px] sm:-right-[70px] sm:w-[140px] md:-right-[75px] md:w-[150px]"
-                              ></span>
-                           <span
-                              class="border-primary bg-primary relative z-10 mx-auto mb-2 flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 text-base font-medium text-white"
+                              class="border-black border-opacity-20 bg-stroke opacity-50 relative z-10 mx-auto mb-2 flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 text-base font-medium text-dark"
                               >
-                              <svg
+                              {{-- <svg
                                  width="16"
                                  height="12"
                                  viewBox="0 0 16 12"
@@ -279,12 +207,13 @@
                                     d="M15.671 0.491162L15.6941 0.521153C16.1124 1.06264 16.1273 1.9008 15.5768 2.45815L7.29232 11.3732C6.92972 11.7721 6.43864 12 5.89584 12C5.38903 12 4.87105 11.7821 4.49894 11.3727L0.376545 6.92507C-0.125563 6.36795 -0.125491 5.51224 0.376618 4.95512C0.931025 4.33998 1.8678 4.33778 2.42493 4.94855L5.91939 8.71874L13.5978 0.455859C14.155 -0.154327 15.0914 -0.151944 15.6456 0.46301L15.671 0.491162Z"
                                     fill="white"
                                     />
-                              </svg>
+                              </svg> --}}
+                              1
                            </span>
                            <span
                               class="text-body-color dark:text-dark-6 text-[10px] font-medium sm:text-base"
                               >
-                           Customer
+                           Login
                            </span>
                         </div>
                         <div
@@ -293,10 +222,8 @@
                            <span
                               class="bg-stroke dark:bg-dark-3 absolute top-[16px] -right-[45px] block h-0.5 w-[90px] sm:-right-[70px] sm:w-[140px] md:-right-[75px] md:w-[150px]"
                               ></span>
-                           <span
-                              class="border-primary bg-primary relative z-10 mx-auto mb-[10px] flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 text-base font-medium text-white"
-                              >
-                              <svg
+                           <span class="border-stroke  relative z-10 mx-auto mb-[10px] flex h-[34px] w-[34px] items-center justify-center rounded-full border-2 text-base font-medium text-dark">
+                              {{-- <svg
                                  width="16"
                                  height="12"
                                  viewBox="0 0 16 12"
@@ -309,12 +236,13 @@
                                     d="M15.671 0.491162L15.6941 0.521153C16.1124 1.06264 16.1273 1.9008 15.5768 2.45815L7.29232 11.3732C6.92972 11.7721 6.43864 12 5.89584 12C5.38903 12 4.87105 11.7821 4.49894 11.3727L0.376545 6.92507C-0.125563 6.36795 -0.125491 5.51224 0.376618 4.95512C0.931025 4.33998 1.8678 4.33778 2.42493 4.94855L5.91939 8.71874L13.5978 0.455859C14.155 -0.154327 15.0914 -0.151944 15.6456 0.46301L15.671 0.491162Z"
                                     fill="white"
                                     />
-                              </svg>
+                              </svg> --}}
+                              2
                            </span>
                            <span
                               class="text-body-color dark:text-dark-6 text-[10px] font-medium sm:text-base"
                               >
-                           Shipping
+                           Input Details
                            </span>
                         </div>
                         <div
@@ -331,7 +259,7 @@
                            <span
                               class="text-body-color dark:text-dark-6 text-[10px] font-medium sm:text-base"
                               >
-                           Payment
+                           Process Options
                            </span>
                         </div>
                         <div class="px-3 text-center sm:px-6 md:px-10 lg:px-[50px]">
@@ -343,7 +271,7 @@
                            <span
                               class="text-body-color dark:text-dark-6 text-[10px] font-medium sm:text-base"
                               >
-                           Confirm
+                           Complete
                            </span>
                         </div>
                      </div>
