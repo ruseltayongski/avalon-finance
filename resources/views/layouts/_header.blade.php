@@ -3,13 +3,13 @@
     }" class="absolute top-0 left-0 z-50 w-full ">
     <div class="container mx-auto lg:px-24">
         <div class="relative flex items-center justify-between -mx-4 ">
-            <div class="max-w-full px-4 w-60">
+            <div class="max-w-full px-4 w-[12rem]">
              <a href="javascript:void(0)" class="block w-full">
                  <img src="{{ asset('images/avalon-logo.png') }}" alt="logo" class="avalon-logo mt-6 lg:ml-8" />
              </a>
                
             </div>
-            <div class=" flex items-center justify-between w-full -mt-4">
+            {{-- <div class=" flex items-center justify-between w-full -mt-4">
                 <div>
                     <button @click="navbarOpen = !navbarOpen" :class="navbarOpen && 'navbarTogglerActive'"
                         id="navbarToggler"
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </header>
