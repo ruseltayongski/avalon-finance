@@ -157,7 +157,7 @@
    <div class="container mx-auto pt-28">
       <div class="flex flex-wrap items-center xs:-mx-4">
          <div class="w-full px-4 lg:w-6/12 xl:w-7/12 pb-8">
-            <div class="lg:pb-[240px] pb-24 lg:px-16 ">
+            <div class="lg:pb-[240px] pb-24 lg:px-16">
                <span
                   class="block mb-6 text-base font-medium text-white dark:text-white animate-fade-right animate-duration-1000 animate-delay-300"
                   >
@@ -305,7 +305,7 @@
          </div>
       </div>
    </div>
- </section>
+</section>
 
 @endsection
 
