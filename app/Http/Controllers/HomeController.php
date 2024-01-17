@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+  /*   public function __construct()
     {
         $this->middleware('auth');
-    }
+    } */
 
     /**
      * Show the application dashboard.
@@ -24,5 +26,20 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function checkout() 
+    {
+        return view('checkout');
+    }
+
+    public function sendEmail(Request $request) 
+    {
+        $email = $request->input('email'); // Get email from form data
+      /*   dd($email); */
+        Mail::to($email)
+            ->send(new InvoiceMail());
+
+        return redirect()->back()->with('message', 'Email sent successfully!');
     }
 }
