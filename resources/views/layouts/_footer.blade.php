@@ -14,7 +14,7 @@
                   <p class="text-white dark:text-dark-6"
                      :class="{'text-sm': isMobile, 'text-base': !isMobile}"
                      >
-                     &copy; 2024 Avalon House.All Rights Reserved.
+                     &copy; 2024 Avalon House. All Rights Reserved.
                   </p>
                </div>
             </div>

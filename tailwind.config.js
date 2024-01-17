@@ -9,7 +9,7 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'xs': {'min': '390px', 'max': '430px'}, //iphone 12 pro and iphone 14 pro max
+      'xs': {'min': '360px', 'max': '430px'}, //iphone 12 pro and iphone 14 pro max
       ...defaultTheme.screens,
     },
     extend: {},

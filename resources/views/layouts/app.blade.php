@@ -38,7 +38,13 @@
 </head>
 <body>
     @include('layouts._loading-container')
-    <div id="app">
+    <div id="app" x-data="{ isMobile: window.innerWidth <= 1024 }"
+        x-init="() => {
+            window.addEventListener('resize', () => {
+                isMobile = window.innerWidth <= 1024;
+                console.log(window.innerWidth);
+            });
+        }">
         @include('layouts._header')
         @yield('content')
         @include('layouts._footer')
