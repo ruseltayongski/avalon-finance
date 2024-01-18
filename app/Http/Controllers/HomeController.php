@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
-        $email = $request->input('email1'); // Get email from form data
+        $email = $request->input('email1'); 
       /*   dd($email); */
         Mail::to($email)
             ->send(new InvoiceMail($request->all()));
