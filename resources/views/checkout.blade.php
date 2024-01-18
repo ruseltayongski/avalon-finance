@@ -402,7 +402,8 @@ x-init="() => {
                                     class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
                                     :class="{ 'w-full': isMobile, 'w-full': !isMobile }"   
                                     {{-- x-on:click="submit" --}}
-                                    type="submit"
+                                    @click="modalOpen = true"
+                                    type="button"
                                     >
                                     Thru Phone Process
                                  </button>
@@ -418,148 +419,7 @@ x-init="() => {
                               </button>
                            </div>
                         </div>   
-                        <div x-show="modalOpen" class="bg-[#000000] dark:bg-[#00000] dark:bg-opacity-40 bg-opacity-20 fixed z-50 top-0 left-0 flex items-center 
-                        justify-center w-full h-screen overflow-y-scroll">
-                           <div @click.outside="modalOpen = false" class="relative mx-auto max-w-[660px]
-                           bg-white dark:bg-dark-2 shadow-1 dark:shadow-3 h-[95vh]">
-                              <div class="p-8 bg-white dark:bg-dark-2 rounded-[10px] ">
-                                 <button @click="modalOpen = false" class="bg-red p-1 absolute right-5 top-5 rounded-[5px] text-white dark:text-dark-6">
-                                       <svg 
-                                          width="20" 
-                                          height="20" 
-                                          viewBox="0 0 20 20" 
-                                          fill="none" 
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          class="fill-current dark:fill-white"
-                                          >
-                                          <path 
-                                          d="M11 10L18.625 2.375C18.9062 2.09375 18.9062 1.65625 18.625 1.375C18.3438 1.09375 17.9063 1.09375 17.625 1.375L10 9L2.375 1.375C2.09375 1.09375 1.65625 1.09375 1.375 1.375C1.09375 1.65625 1.09375 2.09375 1.375 2.375L9 10L1.375 17.625C1.09375 17.9063 1.09375 18.3438 1.375 18.625C1.5 18.75 1.6875 18.8438 1.875 18.8438C2.0625 18.8438 2.25 18.7812 2.375 18.625L10 11L17.625 18.625C17.75 18.75 17.9375 18.8438 18.125 18.8438C18.3125 18.8438 18.5 18.7812 18.625 18.625C18.9062 18.3438 18.9062 17.9063 18.625 17.625L11 10Z" 
-                                          />
-                                       </svg>
-                                 </button>
-                                 <h2 class="mb-8 text-lg font-semibold text-dark dark:text-white">Terms and Conditions</h2>
-                                 <p class="text-sm mb-7 dark:text-dark-6 text-body-color">
-                                    1. **Acceptance of Terms**: By completing a transaction over the phone, you agree to these Terms and Conditions.
-                                    <br>
-                                    <br>
-                                    2. **Transaction Process**: Our representative will guide you through the transaction process. You will be asked to provide necessary details such as your name, address, phone number, and payment information.
-                                    <br>
-                                    <br>
-                                    3. **Verification**: For your security, we may verify the information provided. Transactions will only be processed upon successful verification.
-                                    <br>
-                                    <br>
-                                    4. **Payment**: We accept [list accepted payment methods]. Your payment details will be processed securely. The total cost, including taxes and any applicable fees, will be confirmed before finalizing the transaction.
-                                    <br>
-                                    <br>
-                                    5. **Privacy Policy**: Your personal information will be handled in accordance with our Privacy Policy, which can be found at [website link].
-                                    <br>
-                                    <br>
-                                    6. **Cancellations and Refunds**: You may cancel your transaction within [time period] for a full refund. After this period, [explain any applicable cancellation policy or fees].
-                                    <br>
-                                    <br>
-                                    7. **Delivery**: For transactions involving physical goods, we will provide an estimated delivery date. Please ensure the delivery address provided is accurate.
-                                    <br>
-                                    <br>
-                                    8. **Liability**: We are not liable for errors due to incorrect information provided by you or for unforeseen circumstances beyond our control.
-                                    <br>
-                                    <br>
-                                    9. **Customer Service**: For any questions or concerns regarding your transaction, please contact our customer service at [phone number/email].
-                                    <br>
-                                    <br>
-                                    10. **Amendments**: We reserve the right to amend these terms and conditions at any time. Continued use of our phone transaction service constitutes acceptance of these changes.
-                                    <br>
-                                    <br>
-                                    11. **Governing Law**: These terms and conditions are governed by the laws of [Jurisdiction], and any disputes will be subject to the exclusive jurisdiction of its courts.
-                                    <br>
-                                    <br>
-                                    <b>Client’s Consent</b>
-                                    <br>
-                                    <br>
-                                    Do you, [Client's Name], agree and provide your full consent to proceed with the online transaction facilitated by Avalon House? By selecting 'Yes', you acknowledge and understand that this transaction will be conducted securely over the internet and indicate your acceptance of the process and any applicable terms and conditions provided by Avalon House.
-                                 </p>
-                                 <label
-                                    for="checkboxLabelOne"
-                                    class="flex items-center cursor-pointer select-none text-dark dark:text-white"
-                                    >
-                                    <div class="relative">
-                                       <input
-                                          type="checkbox"
-                                          id="checkboxLabelOne"
-                                          class="sr-only"
-                                          />
-                                       <div
-                                          class="flex items-center justify-center w-5 h-5 mr-4 border border-stroke dark:border-dark-3 rounded box"
-                                          >
-                                          <span class="opacity-0">
-                                             <svg
-                                                width="11"
-                                                height="8"
-                                                viewBox="0 0 11 8"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                <path
-                                                   d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
-                                                   fill="white"
-                                                   stroke="white"
-                                                   stroke-width="0.4"
-                                                   />
-                                             </svg>
-                                          </span>
-                                       </div>
-                                    </div>
-                                    The client agrees to the terms and conditions read thru the phone.
-                                 </label>
-                                 <label
-                                 for="checkboxLabelTwo"
-                                 class="flex items-center cursor-pointer select-none text-dark dark:text-white"
-                                 >
-                                 <div class="relative">
-                                    <input
-                                       type="checkbox"
-                                       id="checkboxLabelTwo"
-                                       class="sr-only"
-                                       />
-                                    <div
-                                       class="flex items-center justify-center w-5 h-5 mr-4 border border-stroke dark:border-dark-3 rounded box"
-                                       >
-                                       <span class="opacity-0">
-                                          <svg
-                                             width="11"
-                                             height="8"
-                                             viewBox="0 0 11 8"
-                                             fill="none"
-                                             xmlns="http://www.w3.org/2000/svg"
-                                             >
-                                             <path
-                                                d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
-                                                fill="white"
-                                                stroke="white"
-                                                stroke-width="0.4"
-                                                />
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </div>
-                                 The client grants his/her consent to process the payment thru a secured line.
-                              </label>
-                                 <div class="flex items-center justify-start space-x-1 mt-5">
-                                    <button
-                                       @click="modalOpen = false"
-                                       class="px-5 py-2 text-sm font-medium rounded-md text-white shadow-1 dark:shadow-3 bg-[#011523] hover:bg-[#011523]/80 dark:text-white dark:bg-white/5"
-                                       >
-                                    Proceed
-                                    </button>
-                                    <button
-                                       @click="modalOpen = false"
-                                       class="px-5 py-2 text-sm font-medium text-white rounded-md bg-[#3056D3] bg-opacity-50 hover:bg-opacity-50"
-                                       >
-                                    Cancel   
-                                    </button>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+                    
                         <div x-show="cartNotification"
                            class="fixed z-[60] w-full lg:w-[30%] bottom-20 flex items-center rounded-lg border border-green-light-4 dark:border-green bg-white dark:bg-dark-2 p-5">
                            <div class="mr-5 flex h-[60px] w-full max-w-[60px] items-center justify-center rounded-[5px] bg-green">
@@ -613,6 +473,147 @@ x-init="() => {
                            </div>
                         </div>
                      </form>
+                     <div x-show="modalOpen" class="bg-[#000000] dark:bg-[#00000] dark:bg-opacity-40 bg-opacity-20 fixed z-50 top-0 left-0 flex items-center  justify-center w-full h-screen overflow-y-scroll">
+                        <div @click.outside="modalOpen = false" class="relative mx-auto max-w-[660px]
+                        bg-white dark:bg-dark-2 shadow-1 dark:shadow-3 h-[95vh]">
+                           <div class="p-8 bg-white dark:bg-dark-2 rounded-[10px] ">
+                              <button @click="modalOpen = false" class="bg-red p-1 absolute right-5 top-5 rounded-[5px] text-white dark:text-dark-6">
+                                    <svg 
+                                       width="20" 
+                                       height="20" 
+                                       viewBox="0 0 20 20" 
+                                       fill="none" 
+                                       xmlns="http://www.w3.org/2000/svg"
+                                       class="fill-current dark:fill-white"
+                                       >
+                                       <path 
+                                       d="M11 10L18.625 2.375C18.9062 2.09375 18.9062 1.65625 18.625 1.375C18.3438 1.09375 17.9063 1.09375 17.625 1.375L10 9L2.375 1.375C2.09375 1.09375 1.65625 1.09375 1.375 1.375C1.09375 1.65625 1.09375 2.09375 1.375 2.375L9 10L1.375 17.625C1.09375 17.9063 1.09375 18.3438 1.375 18.625C1.5 18.75 1.6875 18.8438 1.875 18.8438C2.0625 18.8438 2.25 18.7812 2.375 18.625L10 11L17.625 18.625C17.75 18.75 17.9375 18.8438 18.125 18.8438C18.3125 18.8438 18.5 18.7812 18.625 18.625C18.9062 18.3438 18.9062 17.9063 18.625 17.625L11 10Z" 
+                                       />
+                                    </svg>
+                              </button>
+                              <h2 class="mb-8 text-lg font-semibold text-dark dark:text-white">Terms and Conditions</h2>
+                              <p class="text-sm mb-7 dark:text-white text-body-color">
+                                 1. **Acceptance of Terms**: By completing a transaction over the phone, you agree to these Terms and Conditions.
+                                 <br>
+                                 <br>
+                                 2. **Transaction Process**: Our representative will guide you through the transaction process. You will be asked to provide necessary details such as your name, address, phone number, and payment information.
+                                 <br>
+                                 <br>
+                                 3. **Verification**: For your security, we may verify the information provided. Transactions will only be processed upon successful verification.
+                                 <br>
+                                 <br>
+                                 4. **Payment**: We accept [list accepted payment methods]. Your payment details will be processed securely. The total cost, including taxes and any applicable fees, will be confirmed before finalizing the transaction.
+                                 <br>
+                                 <br>
+                                 5. **Privacy Policy**: Your personal information will be handled in accordance with our Privacy Policy, which can be found at [website link].
+                                 <br>
+                                 <br>
+                                 6. **Cancellations and Refunds**: You may cancel your transaction within [time period] for a full refund. After this period, [explain any applicable cancellation policy or fees].
+                                 <br>
+                                 <br>
+                                 7. **Delivery**: For transactions involving physical goods, we will provide an estimated delivery date. Please ensure the delivery address provided is accurate.
+                                 <br>
+                                 <br>
+                                 8. **Liability**: We are not liable for errors due to incorrect information provided by you or for unforeseen circumstances beyond our control.
+                                 <br>
+                                 <br>
+                                 9. **Customer Service**: For any questions or concerns regarding your transaction, please contact our customer service at [phone number/email].
+                                 <br>
+                                 <br>
+                                 10. **Amendments**: We reserve the right to amend these terms and conditions at any time. Continued use of our phone transaction service constitutes acceptance of these changes.
+                                 <br>
+                                 <br>
+                                 11. **Governing Law**: These terms and conditions are governed by the laws of [Jurisdiction], and any disputes will be subject to the exclusive jurisdiction of its courts.
+                                 <br>
+                                 <br>
+                                 <b>Client’s Consent</b>
+                                 <br>
+                                 <br>
+                                 Do you, [Client's Name], agree and provide your full consent to proceed with the online transaction facilitated by Avalon House? By selecting 'Yes', you acknowledge and understand that this transaction will be conducted securely over the internet and indicate your acceptance of the process and any applicable terms and conditions provided by Avalon House.
+                              </p>
+                              <label
+                                 for="checkboxLabelOne"
+                                 class="flex items-center cursor-pointer select-none text-dark dark:text-white"
+                                 >
+                                 <div class="relative">
+                                    <input
+                                       type="checkbox"
+                                       id="checkboxLabelOne"
+                                       class="sr-only"
+                                       />
+                                    <div
+                                       class="flex items-center justify-center w-5 h-5 mr-2 border border-dark-5 dark:border-dark-5 rounded box"
+                                       >
+                                       <span class="opacity-0">
+                                          <svg
+                                             width="11"
+                                             height="8"
+                                             viewBox="0 0 11 8"
+                                             fill="none"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             >
+                                             <path
+                                                d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                                                fill="white"
+                                                stroke="white"
+                                                stroke-width="0.4"
+                                                />
+                                          </svg>
+                                       </span>
+                                    </div>
+                                 </div>
+                                 The client agrees to the terms and conditions read thru the phone.
+                              </label>
+                              <label
+                              for="checkboxLabelTwo"
+                              class="flex items-center cursor-pointer select-none text-dark dark:text-white"
+                              >
+                              <div class="relative">
+                                 <input
+                                    type="checkbox"
+                                    id="checkboxLabelTwo"
+                                    class="sr-only"
+                                    />
+                                 <div
+                                    class="flex items-center justify-center w-5 h-5 mr-2 border border-dark-5 dark:border-dark-3 rounded box"
+                                    >
+                                    <span class="opacity-0">
+                                       <svg
+                                          width="11"
+                                          height="8"
+                                          viewBox="0 0 11 8"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                          <path
+                                             d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                                             fill="white"
+                                             stroke="white"
+                                             stroke-width="0.4"
+                                             />
+                                       </svg>
+                                    </span>
+                                 </div>
+                              </div>
+                              The client grants his/her consent to process the payment thru a secured line.
+                           </label>
+                              <div class="flex items-center justify-start space-x-1 mt-5">
+                                 <button
+                                    @click="modalOpen = false"
+                                    class="px-5 py-2 text-sm font-medium rounded-md text-white shadow-1 dark:shadow-3 bg-[#011523] hover:bg-[#011523]/80 dark:text-white dark:bg-white/5"
+                                    >
+                                 Proceed
+                                 </button>
+                                 <button
+                                    @click="modalOpen = false"
+                                    class="px-5 py-2 text-sm font-medium text-white rounded-md bg-[#3056D3] bg-opacity-50 hover:bg-opacity-50"
+                                    >
+                                 Cancel   
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
