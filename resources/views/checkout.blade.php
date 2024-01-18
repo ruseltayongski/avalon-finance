@@ -153,6 +153,7 @@
       opacity: 1;
    }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
 @endsection
 
 <div 
@@ -215,6 +216,15 @@ x-init="() => {
                      }">
                      <form action="{{ route('send.email') }}" method="POST" class="pb-4 mb-10 border-b border-stroke dark:border-dark-3 animate-fade-right animate-duration-1000 animate-delay-500">
                         @csrf
+                        <div :class="{ 'w-full flex justify-center pb-5': isMobile, 'w-1/2': !isMobile}">
+                           <select name="countries" id="countries" multiple>
+                              <option value="1">Afghanistan</option>
+                              <option value="2">Australia</option>
+                              <option value="3">Germany</option>
+                              <option value="4">Canada</option>
+                              <option value="5">Russia</option>
+                          </select>
+                        </div>
                         <div class="flex flex-wrap -mx-4">
                            <div class="w-full px-4 md:w-1/2">
                               <div class="mb-5">
@@ -723,6 +733,10 @@ x-init="() => {
 @endsection
 
 @section('js')
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+<script>
+   new MultiSelectTag('countries')
+</script>
 <script>
    document.addEventListener("DOMContentLoaded", function() {
       var elementIds = [
