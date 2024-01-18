@@ -160,10 +160,7 @@ x-init="() => {
 }">
    <div class="absolute top-0 left-0 z-[-1] h-1/2 w-full bg-[#011523] dark:bg-dark-3"></div>
    <div class="container mx-auto">
-      <div class="flex flex-wrap {{-- -mx-4 --}}"
-            :class="{ '-mx-4': isMobile, 'mx-auto': !isMobile }"   
-    {{--         x-data="{ checkout: JSON.parse(decodeURIComponent(new URL(window.location.href).searchParams.get('carts'))) }" --}}
-      >
+      <div class="flex flex-wrap" :class="{ '-mx-4': isMobile, 'mx-auto': !isMobile }">
          <div class="w-full px-4 lg:w-7/12 xl:w-8/12 lg:px-16">
             <div class="mb-12 lg:mb-0">
                <h3
@@ -197,11 +194,9 @@ x-init="() => {
                         typeOfPayment: '',
                         totalAmount: ''
                         },
-                        
                      }">
-                     <form  action="{{-- {{ route('stripe.session') }} --}}" class="pb-4 mb-10 border-b border-stroke dark:border-dark-3 animate-fade-right animate-duration-1000 animate-delay-500">
-                        {{-- @csrf --}}
-                      {{--   <input type="hidden" name="checkout" :value="decodeURIComponent(new URL(window.location.href).searchParams.get('carts'))"> --}}
+                     <form action="{{ route('send.email') }}" method="POST" class="pb-4 mb-10 border-b border-stroke dark:border-dark-3 animate-fade-right animate-duration-1000 animate-delay-500">
+                        @csrf
                         <div class="flex flex-wrap -mx-4">
                            <div class="w-full px-4 md:w-1/2">
                               <div class="mb-5">
@@ -384,19 +379,16 @@ x-init="() => {
                                     />
                               </div>
                            </div>
-                          <div class="px-4" :class="{ 'w-full flex justify-center pb-5': isMobile, 'w-1/2': !isMobile}">
-                              <button {{-- @click="cartNotification = true" --}} 
-                                 class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
-                                 :class="{ 'w-full': isMobile, 'w-full': !isMobile }"   
-                                 {{-- x-on:click="submit" --}}
-                                 type="submit"
-                                 >
-                                 Thru Phone Process
-                              </button>
-                          </div>
-                          <form action="{{ route('send.email') }}" method="POST">
-                           @csrf
-                           <input type="hidden" name="email" value="trodfil@gmail.com">
+                           <div class="px-4" :class="{ 'w-full flex justify-center pb-5': isMobile, 'w-1/2': !isMobile}">
+                                 <button {{-- @click="cartNotification = true" --}} 
+                                    class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
+                                    :class="{ 'w-full': isMobile, 'w-full': !isMobile }"   
+                                    {{-- x-on:click="submit" --}}
+                                    type="submit"
+                                    >
+                                    Thru Phone Process
+                                 </button>
+                           </div>
                            <div class="px-4" :class="{ 'w-full flex justify-center': isMobile, 'w-1/2': !isMobile}">
                               <button {{-- @click="cartNotification = true" --}} 
                                  class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
@@ -406,8 +398,7 @@ x-init="() => {
                                  >
                                  Send Invoice
                               </button>
-                             </div>
-                          </form>
+                           </div>
                         </div>   
                         <div x-show="cartNotification"
                            class="fixed z-[60] w-full lg:w-[30%] bottom-20 flex items-center rounded-lg border border-green-light-4 dark:border-green bg-white dark:bg-dark-2 p-5">
@@ -463,28 +454,6 @@ x-init="() => {
                         </div>
                      </form>
                   </div>
-                  {{-- <script>
-                     function submit() {
-                        fetch("/stripe/session", {
-                           method: "POST",
-                           headers: {
-                              "Content-Type": "application/json",
-                              "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
-                           },
-                           //body: JSON.stringify(this.formData),
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                           /* this.cartNotification = true; */
-                           console.log("Form submitted successfully:", data);
-            
-                        })
-                        .catch(error => {
-                           console.error("Error submitting form:", error);
-                           // Handle the error and update your UI accordingly
-                        });
-                     }
-                  </script> --}}
                </div>
             </div>
          </div>
