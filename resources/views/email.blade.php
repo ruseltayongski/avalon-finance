@@ -1,5 +1,5 @@
 <html>
-dasdsadsadsa
+Invoice
 <body
     style="background-color:#eaeced;font-family: Open Sans, sans-serif;font-size:100%;font-weight:400;line-height:1.4;color:#000; padding: 30px;">
     <table
@@ -9,8 +9,9 @@ dasdsadsadsa
                 <th style="text-align:left;font-weight:bold; font-size: 30px">Invoice</th>
                 <th></th>
                 <th></th>
-                <th style="text-align:right;"><img style="max-width: 68px;"
-                        src="https://avalonhouse.us/images/avalon-logo.png" alt="bachana tours"></th>
+                <th style="text-align:right;">
+                    <img style="max-width: 68px;" src="https://avalonhouse.us/images/avalon-logo.png" alt="bachana tours">
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +20,7 @@ dasdsadsadsa
             </tr>
 
             <tr>
-                <td style="padding: 0px 0px 30px; font-size 14px;" colspan="2"><span>Date due Febuary 5, 2022</span>
+                <td style="padding: 0px 0px 30px; font-size 14px;" colspan="2"><span>Date due {{ date("F j, Y") }}</span>
                 </td>
             </tr>
             <tr>
@@ -30,24 +31,26 @@ dasdsadsadsa
             <tr>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600;font-size: 15px;"><span>Jane Diaz</span></td>
+                <td style="font-weight: 600;font-size: 15px;"><span>{{ $data['fullName'] }}</span></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600;font-size: 15px;"><span>jane.diaz@stripe.com</span></td>
+                <td style="font-weight: 600;font-size: 15px;"><span>{{ $data['email1'] }}</span></td>
             </tr>
             <tr>
                 <td style="padding-bottom: 16px;"></td>
             </tr>
             <tr>
-                <td style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">$48.99 due February 5, 2022</td>
+                <td style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">$48.99 due {{ date("F j, Y") }}</td>
             </tr>
             <tr>
                 <td>
-                    <button style="border: none; background: #011523; color: white; padding: 10px 69px 12px 69px;">
-                        Pay Online
-                    </button>
+                    <form action="{{ route('stripe.session') }}" method="GET" target="_blank">
+                        <button type="submit" style="border: none; background: #011523; color: white; padding: 10px 69px 12px 69px; text-decoration: none; cursor: pointer;">
+                            Pay Online
+                        </button>
+                    </form>
                 </td>
             </tr>
             <tr>

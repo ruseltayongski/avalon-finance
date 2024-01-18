@@ -35,10 +35,10 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
-        $email = $request->input('email'); // Get email from form data
+        $email = $request->input('email1'); // Get email from form data
       /*   dd($email); */
         Mail::to($email)
-            ->send(new InvoiceMail());
+            ->send(new InvoiceMail($request->all()));
 
         return redirect()->back()->with('message', 'Email sent successfully!');
     }

@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
 Route::post('/email', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('send.email');
+
+Route::get('/stripe/session', [App\Http\Controllers\StripeController::class, 'session'])->name('stripe.session');

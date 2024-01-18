@@ -13,13 +13,13 @@ class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-   /*  public $mailData; */
+    public $mailData;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($mailData)
     {
-     /*    $this->mailData = $mailData; */
+        $this->mailData = $mailData;
     }
 
     /**
@@ -39,9 +39,9 @@ class InvoiceMail extends Mailable
     {
         return new Content(
             view: 'email',
-           /*  with:[
-                'data' =>$this->mailData
-            ] */
+            with: [
+                'data' => $this->mailData
+            ] 
         );
     }
 
