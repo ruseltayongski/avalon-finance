@@ -293,15 +293,6 @@
 <section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]">
    <div class="absolute top-0 left-0 z-[-1] h-1/2 w-full bg-[#011523] dark:bg-dark-3"></div>
    <div class="container mx-auto">
-
-      <select name="countries" id="countries" style="z-index: 99999;" multiple>
-         <option value="1">Afghanistan</option>
-         <option value="2">Australia</option>
-         <option value="3">Germany</option>
-         <option value="4">Canada</option>
-         <option value="5">Russia</option>
-      </select>
-
       <div class="flex flex-wrap" :class="{ '-mx-4': isMobile, 'mx-auto': !isMobile }">
          <div class="w-full px-4 lg:w-7/12 xl:w-8/12 lg:px-16">
             <div class="mb-12 lg:mb-0">
@@ -522,6 +513,21 @@
                                     />
                               </div>
                            </div>
+                           
+                           <div class="w-full px-4 md:w-full">
+                              <div class="mb-8">
+                                 <label
+                                    for=""
+                                    class="mb-2.5 block text-base font-medium text-dark dark:text-white"
+                                    >
+                                    Service/s Availed<span class="text-red">*</span>
+                                 </label>
+                                 <select name="services" id="services" style="z-index: 99999;" multiple>
+                                 </select>
+                              </div>
+                              <hr class="border-1 border-500 cursor-pointer  duration-500 mb-8" />
+                           </div>
+                           
                            <div class="px-4" :class="{ 'w-full flex justify-center pb-5': isMobile, 'w-1/2': !isMobile}">
                                  <button {{-- @click="cartNotification = true" --}} 
                                     class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
@@ -543,6 +549,7 @@
                                  Send Invoice
                               </button>
                            </div>
+                           
                         </div>   
                     
                         <div x-show="cartNotification"
@@ -866,14 +873,180 @@
          v = null,
          m = t.tagColor || {},
          h = new DOMParser();
-      function f(e = null) {
-         for (var t of ((v.innerHTML = ""), l))
-               if (t.selected) !w(t.value) && g(t);
-               else {
-                  const n = document.createElement("li");
-                  (n.innerHTML = t.label), (n.dataset.value = t.value), e && t.label.toLowerCase().startsWith(e.toLowerCase()) ? v.appendChild(n) : e || v.appendChild(n);
-               }
+
+      var business = "Business Affairs";
+      var tech = "Tech & Dev";
+      var digital = "Digital Media & Marketing";
+      var book = "Book-to-film/TV";
+      var creation = "Book Creation";
+
+      function f(e = null, x = null) {
+         if(e) {
+            l = [];
+            var regex = new RegExp(".*" + e.toLowerCase() + ".*");
+            if (regex.test(business.toLowerCase())) {
+               l.push({
+                     "value": "1",
+                     "label": "Business1",
+                     "selected": false
+                  });
+               l.push({
+                  "value": "2",
+                  "label": "Business2",
+                  "selected": false
+               });
+               l.push({
+                  "value": "3",
+                  "label": "Business3",
+                  "selected": false
+               });
+               l.push({
+                  "value": "4",
+                  "label": "Business4",
+                  "selected": false
+               });
+               l.push({
+                  "value": "5",
+                  "label": "Business5",
+                  "selected": false
+               });
+            }
+            if (regex.test(tech.toLowerCase())) {
+               l.push({
+                  "value": "6",
+                  "label": "Tech1",
+                  "selected": false
+               });
+               l.push({
+                  "value": "7",
+                  "label": "Tech2",
+                  "selected": false
+               });
+               l.push({
+                  "value": "8",
+                  "label": "Tech3",
+                  "selected": false
+               });
+               l.push({
+                  "value": "9",
+                  "label": "Tech4",
+                  "selected": false
+               });
+               l.push({
+                  "value": "10",
+                  "label": "Tech5",
+                  "selected": false
+               });
+            }
+            else if (regex.test(digital.toLowerCase())) {
+               l.push({
+                  "value": "11",
+                  "label": "Digital1",
+                  "selected": false
+               });
+               l.push({
+                  "value": "12",
+                  "label": "Digital2",
+                  "selected": false
+               });
+               l.push({
+                  "value": "13",
+                  "label": "Digital3",
+                  "selected": false
+               });
+               l.push({
+                  "value": "14",
+                  "label": "Digital4",
+                  "selected": false
+               });
+               l.push({
+                  "value": "15",
+                  "label": "Digital5",
+                  "selected": false
+               });
+            }
+            else if (regex.test(book.toLowerCase())) {
+               l.push({
+                  "value": "16",
+                  "label": "Book1",
+                  "selected": false
+               });
+               l.push({
+                  "value": "17",
+                  "label": "Book2",
+                  "selected": false
+               });
+               l.push({
+                  "value": "18",
+                  "label": "Book3",
+                  "selected": false
+               });
+               l.push({
+                  "value": "19",
+                  "label": "Book4",
+                  "selected": false
+               });
+               l.push({
+                  "value": "20 ",
+                  "label": "Book5",
+                  "selected": false
+               });
+            }
+            else if (regex.test(creation.toLowerCase())) {
+               l.push({
+                  "value": "21",
+                  "label": "Creation1",
+                  "selected": false
+               });
+               l.push({
+                  "value": "22",
+                  "label": "Creation2",
+                  "selected": false
+               });
+               l.push({
+                  "value": "23",
+                  "label": "Creation3",
+                  "selected": false
+               });
+               l.push({
+                  "value": "24",
+                  "label": "Creation4",
+                  "selected": false
+               });
+               l.push({
+                  "value": "25",
+                  "label": "Creation5",
+                  "selected": false
+               });
+            }
+         }
+         else if(x) {
+            l = x;
+         }
+         for (var t of ((v.innerHTML = ""), l)) {
+            if (t.selected) {
+               console.log("selected");
+               !w(t.value) && g(t);
+            }
+            else {
+               const n = document.createElement("li");
+               (n.innerHTML = t.label);
+               (n.dataset.value = t.value);
+               console.log(n)
+               v.appendChild(n);
+               // if(e && t.label.toLowerCase().startsWith(e.toLowerCase())) {
+               //    v.appendChild(n)
+               // }
+               // else {
+               //    // e || v.appendChild(n);
+               //    if (!e) {
+               //       v.appendChild(n);
+               //    }
+               // }  
+            }
+         }
       }
+
       function g(e) {
          const t = document.createElement("div");
          t.classList.add("item-container"), (t.style.color = m.textColor || "#2c7a7b"), (t.style.borderColor = m.borderColor || "#81e6d9"), (t.style.background = m.bgColor || "#e6fffa");
@@ -890,24 +1063,31 @@
                t.appendChild(d),
                o.append(t);
       }
+
       function L() {
          for (var e of v.children)
-               e.addEventListener("click", (e) => {
-                  (l.find((t) => t.value == e.target.dataset.value).selected = !0), (c.value = null), f(), E(), c.focus();
-               });
+            e.addEventListener("click", (e) => {
+               (l.find((t) => t.value == e.target.dataset.value).selected = !0), (c.value = null), f(), E(), c.focus();
+            });
       }
+
       function w(e) {
          for (var t of o.children) if (!t.classList.contains("input-body") && t.firstChild.dataset.value == e) return !0;
          return !1;
       }
+
       function C(e) {
          for (var t of o.children) t.classList.contains("input-body") || t.firstChild.dataset.value != e || o.removeChild(t);
       }
+
       function E(e = !0) {
          selected_values = [];
-         for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
-         e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
+         try {
+            for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
+            e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
+         } catch(e) {}
       }
+
       (n = document.getElementById(e)),
          (function () {
                (l = [...n.options].map((e) => ({ value: e.value, label: e.label, selected: e.selected }))),
@@ -950,7 +1130,8 @@
                p.classList.contains("hidden") && (f(), L(), p.classList.remove("hidden"), c.focus());
          }),
          c.addEventListener("keyup", (e) => {
-               f(e.target.value), L();
+            f(e.target.value,null);
+            L();
          }),
          c.addEventListener("keydown", (e) => {
                if ("Backspace" === e.key && !e.target.value && o.childElementCount > 1) {
@@ -961,9 +1142,13 @@
          window.addEventListener("click", (e) => {
                d.contains(e.target) || p.classList.add("hidden");
          });
-   }
 
-   new MultiSelectTag('countries')
+         return {
+            f: f,
+         };
+   }
+   
+   var select_element = new MultiSelectTag('services')
 </script>
 <script>
    document.addEventListener("DOMContentLoaded", function() {

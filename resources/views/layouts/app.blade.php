@@ -42,12 +42,11 @@
         x-init="() => {
             window.addEventListener('resize', () => {
                 isMobile = window.innerWidth <= 1024;
-                console.log(window.innerWidth);
             });
         }">
-        @include('layouts._header')
+        {{-- @include('layouts._header') --}}
         @yield('content')
-        @include('layouts._footer')
+        {{-- @include('layouts._footer') --}}
     </div>
     @include('layouts._themeSwitcher')
 </body>
