@@ -13,7 +13,7 @@ Invoice
                     <img style="max-width: 68px;" src="https://avalonhouse.us/images/avalon-logo.png" alt="bachana tours">
                 </th>
             </tr>
-        </thead>
+        </thead>    
         <tbody>
             <tr>
                 <td style="padding: 0px 0px 0px; font-size: 14px; font-weight: bold;"><span>Invoice number 2632132132</span></td>

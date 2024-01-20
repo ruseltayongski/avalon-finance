@@ -282,6 +282,9 @@
       border-radius: 0.375rem;
    }
 
+   .disabled-cursor {
+        cursor: not-allowed;
+    }
 </style>
 @endsection
 
@@ -290,7 +293,9 @@
     :style="isMobile ? 'background-image: url({{ asset('/images/v2crop.png') }})' : ''"> 
 </div>
 
-<section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]">
+<section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]"  x-data="{
+   sendInvoice: false,  
+}">
    <div class="absolute top-0 left-0 z-[-1] h-1/2 w-full bg-[#011523] dark:bg-dark-3"></div>
    <div class="container mx-auto">
       <div class="flex flex-wrap" :class="{ '-mx-4': isMobile, 'mx-auto': !isMobile }">
@@ -315,7 +320,6 @@
                      Personal Details
                   </h4>
                   <div x-data="{ 
-                        cartNotification: false,
                         modalOpen: false,
                         formData: {
                         fullName: '',
@@ -543,67 +547,12 @@
                               <button {{-- @click="cartNotification = true" --}} 
                                  class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
                                  :class="{ 'w-full': isMobile, 'w-full': !isMobile }"   
-                                 {{-- x-on:click="submit" --}}
                                  type="submit"
                                  >
                                  Send Invoice
                               </button>
                            </div>
-                           
                         </div>   
-                    
-                        <div x-show="cartNotification"
-                           class="fixed z-[60] w-full lg:w-[30%] bottom-20 flex items-center rounded-lg border border-green-light-4 dark:border-green bg-white dark:bg-dark-2 p-5">
-                           <div class="mr-5 flex h-[60px] w-full max-w-[60px] items-center justify-center rounded-[5px] bg-green">
-                              <svg 
-                                 width="24" 
-                                 height="25" 
-                                 viewBox="0 0 24 25" 
-                                 fill="none" 
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 >
-                                 <path 
-                                    d="M12 1.17499C5.7375 1.17499 0.675003 6.23749 0.675003 12.5C0.675003 18.7625 5.7375 23.8625 12 23.8625C18.2625 23.8625 23.3625 18.7625 23.3625 12.5C23.3625 6.23749 18.2625 1.17499 12 1.17499ZM12 22.175C6.675 22.175 2.3625 17.825 2.3625 12.5C2.3625 7.17499 6.675 2.86249 12 2.86249C17.325 2.86249 21.675 7.21249 21.675 12.5375C21.675 17.825 17.325 22.175 12 22.175Z" 
-                                    fill="white"
-                                    />
-                                 <path 
-                                    d="M15.225 9.01248L10.7625 13.3625L8.7375 11.375C8.4 11.0375 7.875 11.075 7.5375 11.375C7.2 11.7125 7.2375 12.2375 7.5375 12.575L9.9375 14.9C10.1625 15.125 10.4625 15.2375 10.7625 15.2375C11.0625 15.2375 11.3625 15.125 11.5875 14.9L16.425 10.25C16.7625 9.91248 16.7625 9.38748 16.425 9.04998C16.0875 8.71248 15.5625 8.71248 15.225 9.01248Z" 
-                                    fill="white"
-                                    />
-                              </svg>
-                           </div>
-                           <div class="flex w-full items-center justify-between">
-                              <div>
-                                 <h6 class="text-base font-semibold text-dark dark:text-white sm:text-lg mb-0.5">
-                                 Congratulations
-                                 </h6>
-                                 <p class="text-body-color text-sm dark:text-dark-6">
-                                 your transaction was successful
-                                 </p>
-                              </div>
-                              <button class="text-dark-5 dark:text-dark-6 hover:text-green" @click="cartNotification = false" type="button">
-                                 <svg 
-                                 width="16" 
-                                 height="16" 
-                                 viewBox="0 0 16 16" 
-                                 fill="none" 
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 class="fill-current"
-                                 >
-                                 <g clip-path="url(#clip0_1088_26057)">
-                                    <path 
-                                          d="M8.79999 7.99999L14.9 1.89999C15.125 1.67499 15.125 1.32499 14.9 1.09999C14.675 0.874994 14.325 0.874994 14.1 1.09999L7.99999 7.19999L1.89999 1.09999C1.67499 0.874994 1.32499 0.874994 1.09999 1.09999C0.874994 1.32499 0.874994 1.67499 1.09999 1.89999L7.19999 7.99999L1.09999 14.1C0.874994 14.325 0.874994 14.675 1.09999 14.9C1.19999 15 1.34999 15.075 1.49999 15.075C1.64999 15.075 1.79999 15.025 1.89999 14.9L7.99999 8.79999L14.1 14.9C14.2 15 14.35 15.075 14.5 15.075C14.65 15.075 14.8 15.025 14.9 14.9C15.125 14.675 15.125 14.325 14.9 14.1L8.79999 7.99999Z" 
-                                          />
-                                 </g>
-                                 <defs>
-                                    <clipPath id="clip0_1088_26057">
-                                          <rect width="16" height="16" fill="white"/>
-                                    </clipPath>
-                                 </defs>
-                                 </svg>
-                              </button>
-                           </div>
-                        </div>
                      </form>
                      <div x-show="modalOpen" class="bg-[#000000] dark:bg-[#00000] dark:bg-opacity-40 bg-opacity-20 fixed z-50 top-0 left-0 flex items-center  justify-center w-full h-screen overflow-y-scroll">
                         <div @click.outside="modalOpen = false" class="relative mx-auto max-w-[660px]
@@ -731,8 +680,10 @@
                            </label>
                               <div class="flex items-center justify-start space-x-1 mt-5">
                                  <button
-                                    @click="modalOpen = false"
-                                    class="px-5 py-2 text-sm font-medium rounded-md text-white shadow-1 dark:shadow-3 bg-[#011523] hover:bg-[#011523]/80 dark:text-white dark:bg-white/5"
+                                    type="button"
+                                    disabled
+                                    id="proceedButton"
+                                    class="disabled-cursor px-5 py-2 text-sm font-medium rounded-md text-white shadow-1 dark:shadow-3 bg-[#011523] hover:bg-[#011523]/80 dark:text-white dark:bg-white/5"
                                     >
                                  Proceed
                                  </button>
@@ -747,6 +698,76 @@
                         </div>
                      </div>
                   </div>
+                 
+                
+                  <div
+                     x-show="sendInvoice"
+                     x-transition
+                     class="bg-[#000000] dark:bg-[#00000] dark:bg-opacity-40 bg-opacity-20 fixed z-50 top-0 left-0 flex items-center  justify-center w-full h-screen overflow-y-scroll"
+                     >
+                     <div
+                        @click.outside="sendInvoice = false"
+                        class="relative w-full max-w-[570px] rounded-[20px] bg-[#011523] py-12 px-8 text-center md:py-[50px] md:px-[70px]"
+                        >
+                        <div
+                           class="flex items-center justify-center w-20 h-20 mx-auto mb-6 text-white rounded-full bg-white/10"
+                           >
+                           <svg
+                              width="47"
+                              height="47"
+                              viewBox="0 0 47 47"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              >
+                              <path
+                                 d="M23.6134 0.900024C11.0362 0.900024 0.900391 11.0358 0.900391 23.613C0.900391 36.1903 11.0362 46.4 23.6134 46.4C36.1906 46.4 46.4004 36.1903 46.4004 23.613C46.4004 11.0358 36.1906 0.900024 23.6134 0.900024ZM23.6134 43.8106C12.5158 43.8106 3.48982 34.7106 3.48982 23.613C3.48982 12.5155 12.5158 3.48946 23.6134 3.48946C34.711 3.48946 43.811 12.5155 43.811 23.613C43.811 34.7106 34.711 43.8106 23.6134 43.8106Z"
+                                 fill="white"
+                                 />
+                              <path
+                                 d="M33.6768 26.2024H13.5532C12.8874 26.2024 12.2955 26.4983 11.8516 27.0162C11.4817 27.5341 11.2597 28.126 11.4077 28.7918C12.5174 34.5626 17.6223 38.8536 23.615 38.8536C29.6077 38.8536 34.7126 34.6365 35.8223 28.7918C35.9703 28.2 35.7483 27.5341 35.3784 27.0162C35.0085 26.4983 34.3426 26.2024 33.6768 26.2024ZM23.615 36.2642C19.102 36.2642 15.1808 33.1569 14.0711 28.7918H33.2329C32.0491 33.1569 28.128 36.2642 23.615 36.2642Z"
+                                 fill="white"
+                                 />
+                              <path
+                                 d="M14.8109 19.6919C16.4386 19.6919 17.7703 18.3602 17.7703 16.7325C17.7703 15.1049 16.4386 13.7732 14.8109 13.7732C13.1833 13.7732 11.8516 15.1049 11.8516 16.7325C11.9255 18.4342 13.2573 19.6919 14.8109 19.6919Z"
+                                 fill="white"
+                                 />
+                              <path
+                                 d="M32.4183 19.766C34.0527 19.766 35.3777 18.441 35.3777 16.8066C35.3777 15.1722 34.0527 13.8473 32.4183 13.8473C30.7839 13.8473 29.459 15.1722 29.459 16.8066C29.459 18.441 30.7839 19.766 32.4183 19.766Z"
+                                 fill="white"
+                                 />
+                           </svg>
+                        </div>
+                        <h3 class="pb-4 text-3xl font-bold text-white md:text-4xl">
+                           Congratulations!
+                        </h3>
+                        <p class="text-base leading-relaxed text-white mb-9">
+                           You have successfully sent an invoice
+                        </p>
+                        <a
+                           href="javascript:void(0)"
+                           class="inline-block rounded-md border border-white py-3 px-[50px] text-center text-base font-medium text-white transition hover:bg-white hover:text-primary"
+                           >
+                         Send Notif to Email
+                        </a>
+                        <button
+                           @click="sendInvoice = false"
+                           class="absolute flex items-center justify-center text-white transition bg-white rounded-full top-6 right-6 h-7 w-7 bg-opacity-10 hover:bg-opacity-100 hover:text-primary"
+                           >
+                           <svg
+                              width="10"
+                              height="10"
+                              viewBox="0 0 13 13"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              >
+                              <path
+                                 d="M6.4917 7.65579L11.106 12.2645C11.2545 12.4128 11.4715 12.5 11.6738 12.5C11.8762 12.5 12.0931 12.4128 12.2416 12.2645C12.5621 11.9445 12.5623 11.4317 12.2423 11.1114C12.2422 11.1113 12.2422 11.1113 12.2422 11.1113C12.242 11.1111 12.2418 11.1109 12.2416 11.1107L7.64539 6.50351L12.2589 1.91221L12.2595 1.91158C12.5802 1.59132 12.5802 1.07805 12.2595 0.757793C11.9393 0.437994 11.4268 0.437869 11.1064 0.757418C11.1063 0.757543 11.1062 0.757668 11.106 0.757793L6.49234 5.34931L1.89459 0.740581L1.89396 0.739942C1.57364 0.420019 1.0608 0.420019 0.740487 0.739944C0.42005 1.05999 0.419837 1.57279 0.73985 1.89309L6.4917 7.65579ZM6.4917 7.65579L1.89459 12.2639L1.89395 12.2645C1.74546 12.4128 1.52854 12.5 1.32616 12.5C1.12377 12.5 0.906853 12.4128 0.758361 12.2645L1.1117 11.9108L0.758358 12.2645C0.437984 11.9445 0.437708 11.4319 0.757539 11.1116C0.757812 11.1113 0.758086 11.111 0.75836 11.1107L5.33864 6.50287L0.740487 1.89373L6.4917 7.65579Z"
+                                 class="fill-current stroke-current"
+                                 />
+                           </svg>
+                        </button>
+                     </div>
+                 </div>
                </div>
             </div>
          </div>
@@ -1198,6 +1219,20 @@
                observer.observe(element);
          }
       });
+
+      function updateProceedButtonState() {
+        var checkbox = document.getElementById('checkboxLabelOne');
+        var proceedButton = document.getElementById('proceedButton');
+
+        // Enable the button if the checkbox is checked, otherwise disable it
+        if (checkbox.checked) {
+            proceedButton.disabled = false;
+            proceedButton.classList.remove('disabled-cursor');
+        } else {
+            proceedButton.disabled = true;
+            proceedButton.classList.add('disabled-cursor');
+        }
+    }
    });
 </script>
 @endsection

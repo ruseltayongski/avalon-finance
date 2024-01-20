@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendInvoice;
 use Mail;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
@@ -36,10 +37,8 @@ class HomeController extends Controller
     public function sendEmail(Request $request) 
     {
         $email = $request->input('email1'); 
-      /*   dd($email); */
-        Mail::to($email)
-            ->send(new InvoiceMail($request->all()));
-
+        $ccEmail = "donvenancio@gmail.com";
+        dispatch(new SendInvoice($email, $ccEmail, $request->all()));
         return redirect()->back()->with('message', 'Email sent successfully!');
     }
 }
