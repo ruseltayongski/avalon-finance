@@ -900,8 +900,39 @@
       var digital = "Digital Media & Marketing";
       var book = "Book-to-film/TV";
       var creation = "Book Creation";
+      var keyupTimeout;
 
-      function f(e = null, x = null) {
+
+      async function fetchServicesData(apiUrl) {
+         try {
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) {
+               throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data;
+         } catch (error) {
+            console.error('Fetch error:', error);
+            throw error;
+         }
+      }
+
+      async function f(e = null, search = null) {
+         // if(search) {
+         //    const response = await fetchServicesData("{{ asset('services') }}"+"/"+e);
+
+         //    let services_data = response.map(item => {
+         //       return {
+         //          "value": item.id,
+         //          "label": item.title,
+         //          "selected": false
+         //       }
+         //    });
+
+         //    l = services_data;
+         // }
          if(e) {
             l = [];
             var regex = new RegExp(".*" + e.toLowerCase() + ".*");
@@ -1041,10 +1072,8 @@
                });
             }
          }
-         else if(x) {
-            l = x;
-         }
          for (var t of ((v.innerHTML = ""), l)) {
+            console.log(t);
             if (t.selected) {
                console.log("selected");
                !w(t.value) && g(t);
@@ -1053,8 +1082,8 @@
                const n = document.createElement("li");
                (n.innerHTML = t.label);
                (n.dataset.value = t.value);
-               console.log(n)
                v.appendChild(n);
+               //console.log(n)
                // if(e && t.label.toLowerCase().startsWith(e.toLowerCase())) {
                //    v.appendChild(n)
                // }
@@ -1151,17 +1180,20 @@
                p.classList.contains("hidden") && (f(), L(), p.classList.remove("hidden"), c.focus());
          }),
          c.addEventListener("keyup", (e) => {
-            f(e.target.value,null);
-            L();
+            clearTimeout(keyupTimeout);
+            keyupTimeout = setTimeout(() => {
+               f(e.target.value, "search");
+               L();
+            }, 1000);
          }),
          c.addEventListener("keydown", (e) => {
-               if ("Backspace" === e.key && !e.target.value && o.childElementCount > 1) {
-                  const e = i.children[o.childElementCount - 2].firstChild;
-                  (l.find((t) => t.value == e.dataset.value).selected = !1), C(e.dataset.value), E();
-               }
+            if ("Backspace" === e.key && !e.target.value && o.childElementCount > 1) {
+               const e = i.children[o.childElementCount - 2].firstChild;
+               (l.find((t) => t.value == e.dataset.value).selected = !1), C(e.dataset.value), E();
+            }
          }),
          window.addEventListener("click", (e) => {
-               d.contains(e.target) || p.classList.add("hidden");
+            d.contains(e.target) || p.classList.add("hidden");
          });
 
          return {

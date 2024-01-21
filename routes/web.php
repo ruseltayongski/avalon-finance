@@ -28,3 +28,5 @@ Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout']
 Route::post('/email', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('send.email');
 
 Route::get('/stripe/session', [App\Http\Controllers\StripeController::class, 'session'])->name('stripe.session');
+
+Route::get('/services/{category}', [App\Http\Controllers\ServicesController::class, 'services'])->name('services.category');
