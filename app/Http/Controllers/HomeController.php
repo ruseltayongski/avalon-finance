@@ -37,8 +37,8 @@ class HomeController extends Controller
     public function sendEmail(Request $request) 
     {
         $email = $request->input('email1'); 
-        $ccEmail = "donvenancio@gmail.com";
-        dispatch(new SendInvoice($email, $ccEmail, $request->all()));
-        return redirect()->back()->with('message', 'Email sent successfully!');
+    /*     $ccEmail = "ruseltayong@gmail.com"; */
+        dispatch(new SendInvoice($email, /* $ccEmail, */ $request->all()));
+        return redirect()->back()->with('message', 'Invoice sent successfully!');
     }
 }

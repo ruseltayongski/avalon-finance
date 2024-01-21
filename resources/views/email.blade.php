@@ -1,9 +1,10 @@
 <html>
+
 Invoice
 <body
-    style="background-color:#eaeced;font-family: Open Sans, sans-serif;font-size:100%;font-weight:400;line-height:1.4;color:#000; padding: 30px;">
+    style="background-color:#eaeced;font-family: Open Sans, sans-serif;font-size:100%;font-weight:400;line-height:1.4;color:#000; padding-top:5px; padding-bottom:22px;">
     <table
-        style="max-width:818px ;margin:50px auto 10px;background-color:#ffffff;padding:50px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);-moz-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24); border-top: solid 10px #011523;">
+        style="max-width:838px ;margin:50px auto 10px;background-color:#ffffff;padding:50px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);-moz-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24); border-top: solid 10px #011523;">
         <thead>
             <tr>
                 <th style="text-align:left;font-weight:bold; font-size: 30px">Invoice</th>
@@ -16,16 +17,16 @@ Invoice
         </thead>    
         <tbody>
             <tr>
-                <td style="padding: 0px 0px 0px; font-size: 14px; font-weight: bold;"><span>Invoice number 2632132132</span></td>
+                <td colspan="4" style="padding: 0px 0px 0px; font-size: 14px; font-weight: bold;"><span>Invoice number 2632132132</span></td>
             </tr>
 
             <tr>
-                <td style="padding: 0px 0px 30px; font-size 14px;" colspan="2"><span>Date due {{ date("F j, Y") }}</span>
+                <td colspan="4" style="padding: 0px 0px 30px; font-size: 14px;"><span>Date due {{ date("F j, Y") }}</span>
                 </td>
             </tr>
             <tr>
-                <td style="margin-right: 8rem; font-weight: bold; font-size: 15px;"><span>Stripe Shop</span></td>
-                <td></td>
+                <td colspan="2" style="margin-right: 8rem; font-weight: bold; font-size: 15px;"><span>Stripe Shop</span></td>
+             
                 <td style="font-weight: bold; font-size: 15px;"><span>Bill to</span></td>
             </tr>
             <tr>
@@ -42,13 +43,13 @@ Invoice
                 <td style="padding-bottom: 16px;"></td>
             </tr>
             <tr>
-                <td style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">$48.99 due {{ date("F j, Y") }}</td>
+                <td colspan="4" style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">$48.99 due {{ date("F j, Y") }}</td>
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <form action="{{ route('stripe.session') }}" method="GET" target="_blank">
                         <button type="submit" style="border: none; background: #011523; color: white; padding: 10px 69px 12px 69px; text-decoration: none; cursor: pointer;">
-                            Pay Online
+                            <span>Pay Online</span>
                         </button>
                     </form>
                 </td>
@@ -64,25 +65,25 @@ Invoice
             <?php
             $datas = [
                 [
-                    'name' => 'shoes1',
+                    'name' => 'Film Synopsis',
                     'quantity' => '1',
                     'unit_price' => '$48.99',
                     'amount' => '$48.99',
                 ],
                 [
-                    'name' => 'shoes2',
+                    'name' => 'Film Synopsis',
                     'quantity' => '2',
                     'unit_price' => '$48.99',
                     'amount' => '$48.99',
                 ],
                 [
-                    'name' => 'shoes3',
+                    'name' => 'Film Synopsis',
                     'quantity' => '3',
                     'unit_price' => '$48.99',
                     'amount' => '$48.99',
                 ],
                 [
-                    'name' => 'shoes4',
+                    'name' => 'Film Synopsis',
                     'quantity' => '4',
                     'unit_price' => '$48.99',
                     'amount' => '$48.99',
@@ -153,34 +154,34 @@ Invoice
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="font-size:14px;padding:0px 15px 0px 0px;">
+                <td colspan="3" style="font-size:14px;padding:0px 15px 0px 0px;">
                     <strong style="display:block;margin:0 0 10px 0; font-size: 18px; font-weight: bold;">Pay with ACH or wire transfer</strong>
                     <span style="font-size: 14px; font-weight: 500; padding-bottom: 7px;">A routing number, account number, and SWIFT code will be generated for this customer when the
                         invoice is sent</span>
                 </td>
             </tr>
             <tr>
-                <td style="padding-top: 7px;">
+                <td colspan="4" style="padding-top: 7px;">
                     <span style="font-size: 14px; font-weight: 500;">Bank Name ___</span>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <span style="font-size: 14px; font-weight: 500;">Routing number ___</span>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <span style="font-size: 14px; font-weight: 500;">Account number ___</span>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="4">
                     <span style="font-size: 14px; font-weight: 500;">Swift code ___</span>
                 </td>
             </tr>
             <tr>
-                <td style="padding-top: 7px;"> 
+                <td colspan="4" style="padding-top: 7px;"> 
                     <span style="font-size: 14px; font-weight: 500;">26B34523-DRAFT $48.99 due February 5, 2022</span>
                 </td>
             </tr>
