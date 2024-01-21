@@ -296,8 +296,14 @@
 </div>
 
 <section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]"  x-data="{
+   isMobile2: window.innerWidth <= 640,
    sendInvoice: true,  
    thruPhoneProcess: false,
+}"
+x-init="() => {
+   window.addEventListener('resize', () => {
+      isMobile2 = window.innerWidth <= 640;
+   });
 }">
    <div class="absolute top-0 left-0 z-[-1] h-1/2 w-full bg-[#011523] dark:bg-dark-3"></div>
    <div class="container mx-auto  animate-fade-down animate-duration-1000 animate-delay-500">
@@ -534,10 +540,10 @@
                               <hr class="border-1 border-500 cursor-pointer  duration-500 mb-8" />
                            </div>
                            
-                           <div class="px-4" :class="{ 'w-full flex justify-center pb-5': isMobile, 'w-1/2': !isMobile}">
+                           <div class="px-4" :class="{ 'w-full flex justify-center pb-5': isMobile2, 'w-1/2': !isMobile2}">
                                  <button {{-- @click="cartNotification = true" --}} 
                                     class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
-                                    :class="{ 'w-full': isMobile, 'w-full': !isMobile }"   
+                                    :class="{ 'w-full': isMobile2, 'w-full': !isMobile2 }"   
                                     {{-- x-on:click="submit" --}}
                                     @click="thruPhoneProcess = true"
                                     type="button"
@@ -545,10 +551,10 @@
                                     Thru Phone Process
                                  </button>
                            </div>
-                           <div class="px-4" :class="{ 'w-full flex justify-center': isMobile, 'w-1/2': !isMobile}">
+                           <div class="px-4" :class="{ 'w-full flex justify-center': isMobile2, 'w-1/2': !isMobile2}">
                               <button {{-- @click="cartNotification = true" --}} 
                                  class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
-                                 :class="{ 'w-full': isMobile, 'w-full': !isMobile }"   
+                                 :class="{ 'w-full': isMobile2, 'w-full': !isMobile2 }"   
                              
                                  type="submit"
                                  >

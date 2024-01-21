@@ -20,12 +20,12 @@ class SendInvoice implements ShouldQueue
 
     protected $email;
     protected $mailData;
-   /*  protected $ccEmail; */
-    public function __construct($email, /* $ccEmail, */ $mailData)
+    protected $ccEmail;
+    public function __construct($email, $ccEmail, $mailData)
     {
         $this->email = $email;
         $this->mailData = $mailData;
-     /*    $this->ccEmail = $ccEmail; */
+        $this->ccEmail = $ccEmail;
     }
 
     /** 
@@ -34,7 +34,7 @@ class SendInvoice implements ShouldQueue
     public function handle(): void
     {
         Mail::to($this->email)
-          /*    ->cc($this->ccEmail) */
+             ->cc($this->ccEmail)
              ->send(new InvoiceMail($this->mailData));
     }
 }
