@@ -34,7 +34,6 @@ class StripeController extends Controller
             'cancel_url'  => route('checkout'),
         ]);
         
-
         return redirect()->away($session->url)->with('stripe_save', true);;
     }
 }

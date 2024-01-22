@@ -534,7 +534,10 @@ x-init="() => {
                                     >
                                     Service/s Availed<span class="text-red">*</span>
                                  </label>
-                                 <select name="services" id="services" style="z-index: 99999;" multiple>
+                                 <select name="services[]" id="services" style="z-index: 99999;" multiple>
+                                    {{-- <option value="1">haha</option>
+                                    <option value="2">huhu</option>
+                                    <option value="3">zzzz</option> --}}
                                  </select>
                               </div>
                               <hr class="border-1 border-500 cursor-pointer  duration-500 mb-8" />
@@ -891,6 +894,31 @@ x-init="() => {
 @section('js')
 
 <script>
+   function addValues() {
+         var select = document.getElementById('services');
+
+         // Array of values to be added
+         var valuesToAdd = ['Option 1', 'Option 2', 'Option 3'];
+
+         // Loop through the values and add them to the select
+         for (var i = 0; i < valuesToAdd.length; i++) {
+               var option = document.createElement('option');
+               option.value = valuesToAdd[i];
+               option.text = valuesToAdd[i];
+
+               // You can preselect certain options by setting the 'selected' property
+               // For example, preselect 'Option 2'
+               if (valuesToAdd[i] === 'Option 2' || valuesToAdd[i] === 'Option 3') {
+                  option.selected = true;
+               }
+
+               select.add(option);
+         }
+      }
+
+      // Call the function to add values
+      //addValues();
+
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
       var n = null,
          l = null,
@@ -914,17 +942,15 @@ x-init="() => {
       var creation = "Book Creation";
       var keyupTimeout;
 
-
       async function fetchServicesData(apiUrl) {
          try {
             const response = await fetch(apiUrl);
-
-            if (!response.ok) {
-               throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return data;
+            const data = (await response.json()).map(item => ({
+               value: item.id,
+               label: item.title,
+               selected: false
+            }));
+            l = data;
          } catch (error) {
             console.error('Fetch error:', error);
             throw error;
@@ -932,162 +958,13 @@ x-init="() => {
       }
 
       async function f(e = null, search = null) {
-         // if(search) {
-         //    const response = await fetchServicesData("{{ asset('services') }}"+"/"+e);
-
-         //    let services_data = response.map(item => {
-         //       return {
-         //          "value": item.id,
-         //          "label": item.title,
-         //          "selected": false
-         //       }
-         //    });
-
-         //    l = services_data;
-         // }
-         if(e) {
-            l = [];
-            var regex = new RegExp(".*" + e.toLowerCase() + ".*");
-            if (regex.test(business.toLowerCase())) {
-               l.push({
-                     "value": "1",
-                     "label": "Business1",
-                     "selected": false
-                  });
-               l.push({
-                  "value": "2",
-                  "label": "Business2",
-                  "selected": false
-               });
-               l.push({
-                  "value": "3",
-                  "label": "Business3",
-                  "selected": false
-               });
-               l.push({
-                  "value": "4",
-                  "label": "Business4",
-                  "selected": false
-               });
-               l.push({
-                  "value": "5",
-                  "label": "Business5",
-                  "selected": false
-               });
-            }
-            if (regex.test(tech.toLowerCase())) {
-               l.push({
-                  "value": "6",
-                  "label": "Tech1",
-                  "selected": false
-               });
-               l.push({
-                  "value": "7",
-                  "label": "Tech2",
-                  "selected": false
-               });
-               l.push({
-                  "value": "8",
-                  "label": "Tech3",
-                  "selected": false
-               });
-               l.push({
-                  "value": "9",
-                  "label": "Tech4",
-                  "selected": false
-               });
-               l.push({
-                  "value": "10",
-                  "label": "Tech5",
-                  "selected": false
-               });
-            }
-            else if (regex.test(digital.toLowerCase())) {
-               l.push({
-                  "value": "11",
-                  "label": "Digital1",
-                  "selected": false
-               });
-               l.push({
-                  "value": "12",
-                  "label": "Digital2",
-                  "selected": false
-               });
-               l.push({
-                  "value": "13",
-                  "label": "Digital3",
-                  "selected": false
-               });
-               l.push({
-                  "value": "14",
-                  "label": "Digital4",
-                  "selected": false
-               });
-               l.push({
-                  "value": "15",
-                  "label": "Digital5",
-                  "selected": false
-               });
-            }
-            else if (regex.test(book.toLowerCase())) {
-               l.push({
-                  "value": "16",
-                  "label": "Book1",
-                  "selected": false
-               });
-               l.push({
-                  "value": "17",
-                  "label": "Book2",
-                  "selected": false
-               });
-               l.push({
-                  "value": "18",
-                  "label": "Book3",
-                  "selected": false
-               });
-               l.push({
-                  "value": "19",
-                  "label": "Book4",
-                  "selected": false
-               });
-               l.push({
-                  "value": "20 ",
-                  "label": "Book5",
-                  "selected": false
-               });
-            }
-            else if (regex.test(creation.toLowerCase())) {
-               l.push({
-                  "value": "21",
-                  "label": "Creation1",
-                  "selected": false
-               });
-               l.push({
-                  "value": "22",
-                  "label": "Creation2",
-                  "selected": false
-               });
-               l.push({
-                  "value": "23",
-                  "label": "Creation3",
-                  "selected": false
-               });
-               l.push({
-                  "value": "24",
-                  "label": "Creation4",
-                  "selected": false
-               });
-               l.push({
-                  "value": "25",
-                  "label": "Creation5",
-                  "selected": false
-               });
-            }
+         if(e && search) {
+            //console.log(search)
+            await fetchServicesData("{{ asset('services') }}"+"/"+e);
          }
          for (var t of ((v.innerHTML = ""), l)) {
-            console.log(t);
             if (t.selected) {
-               console.log("selected");
+               //console.log(t);
                !w(t.value) && g(t);
             }
             else {
@@ -1095,18 +972,9 @@ x-init="() => {
                (n.innerHTML = t.label);
                (n.dataset.value = t.value);
                v.appendChild(n);
-               //console.log(n)
-               // if(e && t.label.toLowerCase().startsWith(e.toLowerCase())) {
-               //    v.appendChild(n)
-               // }
-               // else {
-               //    // e || v.appendChild(n);
-               //    if (!e) {
-               //       v.appendChild(n);
-               //    }
-               // }  
             }
          }
+         L();
       }
 
       function g(e) {
@@ -1118,8 +986,10 @@ x-init="() => {
                '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="item-close-svg">\n                <line x1="18" y1="6" x2="6" y2="18"></line>\n                <line x1="6" y1="6" x2="18" y2="18"></line>\n                </svg>',
                "image/svg+xml"
          ).documentElement;
+
          d.addEventListener("click", (t) => {
                (l.find((t) => t.value == e.value).selected = !1), C(e.value), f(), E();
+               console.log(l)
          }),
                t.appendChild(n),
                t.appendChild(d),
@@ -1127,15 +997,19 @@ x-init="() => {
       }
 
       function L() {
-         for (var e of v.children)
-            e.addEventListener("click", (e) => {
-               (l.find((t) => t.value == e.target.dataset.value).selected = !0), (c.value = null), f(), E(), c.focus();
-            });
+         //console.log(v.children);
+         for (var e of v.children) {
+            if(e) {
+               e.addEventListener("click", (e) => {
+                  (l.find((t) => t.value == e.target.dataset.value).selected = !0), (c.value = null), f(), E(), c.focus();
+               });
+            }
+         }  
       }
 
       function w(e) {
          for (var t of o.children) if (!t.classList.contains("input-body") && t.firstChild.dataset.value == e) return !0;
-         return !1;
+            return !1;
       }
 
       function C(e) {
@@ -1143,10 +1017,10 @@ x-init="() => {
       }
 
       function E(e = !0) {
-         selected_values = [];
          try {
+            selected_values = [];
             for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
-            e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
+               e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
          } catch(e) {}
       }
 
@@ -1187,33 +1061,38 @@ x-init="() => {
          })(),
          f(),
          L(),
-         E(!1),
+         E(!1)
+         ,
          u.addEventListener("click", () => {
-               p.classList.contains("hidden") && (f(), L(), p.classList.remove("hidden"), c.focus());
-         }),
+            p.classList.contains("hidden") && (f(), L(), p.classList.remove("hidden"), c.focus());
+            //p.classList.contains("hidden") && (f(), p.classList.remove("hidden"), c.focus());
+         })
+         ,
          c.addEventListener("keyup", (e) => {
             clearTimeout(keyupTimeout);
             keyupTimeout = setTimeout(() => {
                f(e.target.value, "search");
-               L();
+               //L();
             }, 1000);
-         }),
+         })
+         ,
          c.addEventListener("keydown", (e) => {
             if ("Backspace" === e.key && !e.target.value && o.childElementCount > 1) {
                const e = i.children[o.childElementCount - 2].firstChild;
                (l.find((t) => t.value == e.dataset.value).selected = !1), C(e.dataset.value), E();
             }
-         }),
+         })
+         ,
          window.addEventListener("click", (e) => {
             d.contains(e.target) || p.classList.add("hidden");
          });
-
-         return {
-            f: f,
-         };
+   
+      return {
+         f: f,
+      };
    }
    
-   var select_element = new MultiSelectTag('services')
+   new MultiSelectTag('services');
 </script>
 <script>
    document.addEventListener("DOMContentLoaded", function() {
