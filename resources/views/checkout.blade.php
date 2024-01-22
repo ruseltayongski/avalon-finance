@@ -903,7 +903,7 @@ x-init="() => {
          // Loop through the values and add them to the select
          for (var i = 0; i < valuesToAdd.length; i++) {
                var option = document.createElement('option');
-               option.value = valuesToAdd[i];
+               option.value = i;
                option.text = valuesToAdd[i];
 
                // You can preselect certain options by setting the 'selected' property
@@ -912,12 +912,13 @@ x-init="() => {
                   option.selected = true;
                }
 
-               select.add(option);
+               console.log(option)
+               //select.add(option);
          }
       }
 
       // Call the function to add values
-      //addValues();
+      addValues();
 
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
       var n = null,
@@ -964,7 +965,6 @@ x-init="() => {
          }
          for (var t of ((v.innerHTML = ""), l)) {
             if (t.selected) {
-               //console.log(t);
                !w(t.value) && g(t);
             }
             else {
@@ -977,11 +977,31 @@ x-init="() => {
          L();
       }
 
+      
       function g(e) {
+         for(var i = 0; i < 5; i++) {
+            var select = document.getElementById('services');
+            var option = document.createElement('option');
+            option.value = i;
+            option.text = i;
+            option.selected = e.selected;
+            // var element = `<option value="${i}">${i}</option>`;
+            // console.log(element)
+            select.appendChild(option);
+         }
+
+
          const t = document.createElement("div");
          t.classList.add("item-container"), (t.style.color = m.textColor || "#2c7a7b"), (t.style.borderColor = m.borderColor || "#81e6d9"), (t.style.background = m.bgColor || "#e6fffa");
-         const n = document.createElement("div");
-         n.classList.add("item-label"), (n.style.color = m.textColor || "#2c7a7b"), (n.innerHTML = e.label), (n.dataset.value = e.value);
+         const n = document.createElement("option");
+         n.classList.add("item-label");
+         n.style.color = m.textColor || "#2c7a7b"; 
+         n.innerHTML = e.label;
+         n.dataset.value = e.value;
+         // n.text = e.label;
+         // n.value = e.value;
+         //n.selected = e.selected;
+         //console.log(n);
          const d = new DOMParser().parseFromString(
                '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="item-close-svg">\n                <line x1="18" y1="6" x2="6" y2="18"></line>\n                <line x1="6" y1="6" x2="18" y2="18"></line>\n                </svg>',
                "image/svg+xml"
@@ -989,7 +1009,6 @@ x-init="() => {
 
          d.addEventListener("click", (t) => {
                (l.find((t) => t.value == e.value).selected = !1), C(e.value), f(), E();
-               console.log(l)
          }),
                t.appendChild(n),
                t.appendChild(d),
@@ -1008,8 +1027,12 @@ x-init="() => {
       }
 
       function w(e) {
-         for (var t of o.children) if (!t.classList.contains("input-body") && t.firstChild.dataset.value == e) return !0;
-            return !1;
+         for (var t of o.children) {
+            if (!t.classList.contains("input-body") && t.firstChild.dataset.value == e) {
+               return !0; //true
+            }
+         }
+         return !1; //false
       }
 
       function C(e) {
