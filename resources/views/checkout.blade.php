@@ -534,7 +534,7 @@ x-init="() => {
                                     >
                                     Service/s Availed<span class="text-red">*</span>
                                  </label>
-                                 <select name="services[]" id="services" style="z-index: 99999;" multiple>
+                                 <select name="services[]" id="services" multiple>
                                     {{-- <option value="1">haha</option>
                                     <option value="2">huhu</option>
                                     <option value="3">zzzz</option> --}}
@@ -913,12 +913,12 @@ x-init="() => {
                }
 
                console.log(option)
-               //select.add(option);
+               select.add(option);
          }
       }
 
       // Call the function to add values
-      addValues();
+      //addValues();
 
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
       var n = null,
@@ -963,6 +963,7 @@ x-init="() => {
             //console.log(search)
             await fetchServicesData("{{ asset('services') }}"+"/"+e);
          }
+         console.log(l)
          for (var t of ((v.innerHTML = ""), l)) {
             if (t.selected) {
                !w(t.value) && g(t);
@@ -977,18 +978,25 @@ x-init="() => {
          L();
       }
 
-      
       function g(e) {
-         for(var i = 0; i < 5; i++) {
-            var select = document.getElementById('services');
-            var option = document.createElement('option');
-            option.value = i;
-            option.text = i;
-            option.selected = e.selected;
-            // var element = `<option value="${i}">${i}</option>`;
-            // console.log(element)
-            select.appendChild(option);
-         }
+         console.log(e)
+         // for (var i = 0; i < 100; i++) {
+         //    var select = document.getElementById('services');
+         //    var option = document.createElement('option');
+         //    option.value = i+"|haha";
+         //    option.text = i;
+         //    option.selected = e.selected;
+         //    console.log(option)
+         //    select.add(option);
+         // }
+
+         var select = document.getElementById('services');
+         var option = document.createElement('option');
+         option.value = e.value;
+         option.text = e.label;
+         option.selected = e.selected;
+         console.log(option)
+         select.add(option);
 
 
          const t = document.createElement("div");
