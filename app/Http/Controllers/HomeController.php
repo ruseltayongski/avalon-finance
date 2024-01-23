@@ -6,6 +6,8 @@ use App\Jobs\SendInvoice;
 use Mail;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
+use App\Models\Services;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -31,7 +33,10 @@ class HomeController extends Controller
 
     public function checkout() 
     {
-        return view('checkout');
+        $services = Services::select("id","title",DB::raw("false as selected"),"picture")->get();
+        return view('checkout',[
+            'services' => $services
+        ]);
     }
 
     public function sendEmail(Request $request) 

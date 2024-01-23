@@ -11,4 +11,8 @@ class Services extends Model
 
     protected $table = 'services';
     protected $guarded = array();
+
+    protected $casts = [
+        'selected' => 'boolean',
+    ];
 }

@@ -299,6 +299,7 @@
    isMobile2: window.innerWidth <= 640,
    sendInvoice: true,  
    thruPhoneProcess: false,
+   totalAmount: 0
 }"
 x-init="() => {
    window.addEventListener('resize', () => {
@@ -328,19 +329,7 @@ x-init="() => {
                      >
                      Personal Details
                   </h4>
-                  <div x-data="{ 
-                        formData: {
-                        fullName: '',
-                        email1: '',
-                        email2: '',
-                        billingAddress: '',
-                        country: '',
-                        city: '',
-                        postCode: '',
-                        typeOfPayment: '',
-                        totalAmount: '',
-                        },
-                     }">
+                  <div>
                      <form action="{{ route('send.email') }}" method="POST" class="pb-4 mb-10 border-b border-stroke dark:border-dark-3{{--  animate-fade-right animate-duration-1000 animate-delay-500 --}}">
                         @csrf
                         <div class="flex flex-wrap -mx-4">
@@ -519,9 +508,9 @@ x-init="() => {
                                  </label>
                                  <input
                                     type="text"
-                                  {{--   :value="checkout.reduce((acc, cart) => parseFloat(acc) + parseFloat(cart.price), 0).toLocaleString()" --}}
                                     class="w-full rounded-md bg-transparent border border-stroke dark:border-dark-3 py-3 px-5 text-body-color dark:text-dark-5 placeholder:text-dark-5 outline-none transition focus:border-[#011523] active:border-[#011523] disabled:cursor-default disabled:bg-[#F5F7FD]"
                                     name="totalAmount"
+                                    x-model="totalAmount"
                                     />
                               </div>
                            </div>
@@ -584,7 +573,7 @@ x-init="() => {
                   class="mb-10 overflow-hidden rounded-[10px] bg-white dark:bg-dark-2 shadow-testimonial-6 dark:shadow-box-dark py-10 px-6 sm:px-10
                   animate-fade-left animate-duration-1000 animate-delay-500">
                   <div id="summary_details">
-                     <div class="flex items-center mb-9">
+                     {{-- <div class="flex items-center mb-9">
                         <div
                            class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
                            >
@@ -611,7 +600,7 @@ x-init="() => {
                               <span class="pr-0.5"> Quantity: </span> <span>1</span>
                            </p>
                         </div>
-                     </div>
+                     </div> --}}
                      {{-- <div class="flex items-center mb-9">
                         <div
                            class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
@@ -642,19 +631,15 @@ x-init="() => {
                      </div> --}}
                   </div>
                   <div class="pt-6 border-t border-stroke dark:border-dark-3">
-                     <p
-                        class="mb-[10px] flex items-center justify-between text-base text-dark dark:text-white"
-                        >
+                     <p class="mb-[10px] flex items-center justify-between text-base text-dark dark:text-white">
                         <span>Subtotal</span>
-                        <span class="font-medium"> $140.98 </span>
+                        <span class="font-medium" id="subTotal"></span>
                      </p>
                   </div>
                   <div class="pt-5 border-t border-stroke dark:border-dark-3">
-                     <p
-                        class="flex items-center justify-between mb-6 text-base text-dark dark:text-white"
-                        >
+                     <p class="flex items-center justify-between mb-6 text-base text-dark dark:text-white">
                         <span>Total Amount</span>
-                        <span class="font-medium"> $124.99 </span>
+                        <span class="font-medium" x-text="'$'+(parseFloat(totalAmount).toLocaleString())"></span>
                      </p>
                   </div>
                </div>
@@ -916,7 +901,11 @@ x-init="() => {
    //addValues();
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
       var selectServices = document.getElementById('services');
+      var summaryDetails = document.getElementById('summary_details');
+      var subTotalSpan = document.getElementById('subTotal');
+      var subTotal = 0;
       var categoryServices = [];
+      var allServices = @json($services);
       var n = null,
          l = null,
          d = null,
@@ -946,7 +935,8 @@ x-init="() => {
                value: item.id,
                label: item.title,
                selected: false,
-               picture: item.picture
+               picture: item.picture,
+               price: item.price
             }));
             l = data;
          } catch (error) {
@@ -984,6 +974,37 @@ x-init="() => {
 
       function g(e) {
          console.log(e)
+         subTotal += parseFloat(e.price);
+         subTotalSpan.innerHTML = "$"+parseFloat(subTotal).toLocaleString();
+         // allServices = allServices.map(item =>
+         //    item.id === e.value ? { ...item, selected: true } : item
+         // );
+         //console.log(allServices)
+         
+         // Create a temporary div element
+         var tempDiv = document.createElement('div');
+
+         // Set the innerHTML of the temporary div with your HTML string
+         tempDiv.innerHTML = `<div class="flex items-center mb-9">
+                                 <div class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3">
+                                    <img src="https://avalonhouse.us/fileupload/services/${e.picture}" alt="product" class="object-cover object-center w-full h-full">
+                                 </div>
+                                 <div class="w-full">
+                                    <p class="mb-[6px] text-base font-medium text-dark dark:text-white">
+                                       ${e.label}
+                                    </p>
+                                    <p class="text-sm font-medium text-body-color dark:text-dark-6">
+                                       $${(parseFloat(e.price).toLocaleString())}
+                                    </p>
+                                    <p class="text-sm font-medium text-body-color dark:text-dark-6">
+                                       <span class="pr-0.5"> Quantity: </span> <span>1</span>
+                                    </p>
+                                 </div>
+                              </div>`;
+
+         // Append the child element (tempDiv) to the summaryDetails
+         summaryDetails.appendChild(tempDiv.firstChild);
+
          const t = document.createElement("div");
          t.classList.add("item-container"), (t.style.color = m.textColor || "#2c7a7b"), (t.style.borderColor = m.borderColor || "#81e6d9"), (t.style.background = m.bgColor || "#e6fffa");
          const n = document.createElement("option");
@@ -1009,6 +1030,7 @@ x-init="() => {
          o.append(t);
 
          categoryServices = [...categoryServices, ...l];
+         console.log(categoryServices)
       }
 
       function L() {
@@ -1043,14 +1065,25 @@ x-init="() => {
       }
 
       function E(e = !0) {
+         //selected_values = [];
+         // for (var index = 0; index < allServices.length; index++) {
+         //    if (allServices[index]['selected'] && n.options[index]) {
+         //       n.options[index]['selected'] = true;
+         //       console.log(n.options[index])
+         //    }
+         // }
+         // //console.log(allServices);
          try {
             selected_values = [];
             // for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
             //    e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
             for (var index = 0; index < categoryServices.length; index++) {
-               n.options[index].selected = categoryServices[index].selected;
                if (categoryServices[index].selected) {
-                  console.log(n.options[index])
+                  //n.options[index].selected = categoryServices[index].selected;
+                  const optionExist = n.querySelector(`[value="${categoryServices[index].value}"]`);
+                  optionExist.selected = true;
+                  //console.log(optionExist)
+                  //console.log(n.options[index])
                   selected_values.push({
                         label: categoryServices[index].label,
                         value: categoryServices[index].value
