@@ -46,10 +46,13 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
-        return Services::whereIn("id", $request->services)->get();
+        /* return $request->all(); */
+        $selectedServices = Services::whereIn("id", $request->services)->get();
+        /* return $selectedServices; */
         $email = $request->input('email1'); 
         $ccEmail = "ruseltayong@gmail.com";
-        dispatch(new SendInvoice($email, $ccEmail, $request->all()));
+        $mailData = $request->all();
+        dispatch(new SendInvoice($email, $ccEmail, $mailData, $selectedServices));
         return redirect()->back()->with('message', 'Invoice sent successfully!');
     }
 }

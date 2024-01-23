@@ -62,7 +62,7 @@ Invoice
             <tr>
                 <td style="height:35px;"></td>
             </tr>
-            <?php
+            {{-- <?php
             $datas = [
                 [
                     'name' => 'Film Synopsis',
@@ -89,7 +89,7 @@ Invoice
                     'amount' => '$48.99',
                 ],
             ];
-            ?>
+            ?> --}}
             <tr>
                 <td style="font-size: 14px">Description</td>
                 <td style="font-size: 14px">Qty</td>
@@ -101,12 +101,12 @@ Invoice
                     <hr style="border: 1px solid #011523">
                 </td>
             </tr>
-            @foreach ($datas as $data)
+            @foreach ($services as $service)
                 <tr>
-                    <td style="font-weight: bold; font-size: 17px;">{{ $data['name'] }}</td>
-                    <td style="font-size: 17px;">{{ $data['quantity'] }}</td>
-                    <td style="padding: 0px 0px 0px 51px; font-size: 17px; font-weight: 500">{{ $data['unit_price'] }}</td>
-                    <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: 500">{{ $data['amount'] }}</td>
+                    <td style="font-weight: bold; font-size: 17px;">{{ $service->title}}</td>
+                    <td style="font-size: 17px;">1</td>
+                    <td style="padding: 0px 0px 0px 51px; font-size: 17px; font-weight: 500">{{ $service->price }}</td>
+                    <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: 500">{{ $service->price }}</td>
                 </tr>
             @endforeach
             <tr>
@@ -119,7 +119,7 @@ Invoice
                 <td></td>
                 <td style="font-size: 17px; font-weight: 500; padding-bottom: 10px;">Subtotal</td>
                 <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">$48.99</td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">{{ $data['subTotal']}}</td>
             </tr>
             <tr>
                 <td></td>
@@ -131,7 +131,7 @@ Invoice
                 <td></td>
                 <td style="font-size: 17px;">Total</td>
                 <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">$48.99</td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">{{ $data['totalAmount']}}</td>
             </tr>
             <tr>
                 <td></td>
@@ -143,7 +143,7 @@ Invoice
                 <td></td>
                 <td style="font-size: 17px; font-weight: bold;">Amount Due</td>
                 <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: bold;">$48.99</td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: bold;">{{ $data['totalAmount']}}</td>
             </tr>
 
         </tbody>

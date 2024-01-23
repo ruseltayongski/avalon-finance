@@ -14,12 +14,14 @@ class InvoiceMail extends Mailable
     use Queueable, SerializesModels;
 
     public $mailData;
+    public $selectedServices;
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($mailData, $selectedServices)
     {
         $this->mailData = $mailData;
+        $this->selectedServices = $selectedServices;
     }
 
     /**
@@ -40,7 +42,8 @@ class InvoiceMail extends Mailable
         return new Content(
             view: 'email',
             with: [
-                'data' => $this->mailData
+                'data' => $this->mailData,
+                'services' => $this->selectedServices
             ] 
         );
     }

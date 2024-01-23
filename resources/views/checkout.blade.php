@@ -332,6 +332,7 @@ x-init="() => {
                   <div>
                      <form action="{{ route('send.email') }}" method="POST" class="pb-4 mb-10 border-b border-stroke dark:border-dark-3{{--  animate-fade-right animate-duration-1000 animate-delay-500 --}}">
                         @csrf
+                        <input type="hidden" name="subTotal" id="subTotalInput">
                         <div class="flex flex-wrap -mx-4">
                            <div class="w-full px-4 md:w-1/2">
                               <div class="mb-5">
@@ -901,6 +902,7 @@ x-init="() => {
    //addValues();
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
       var selectServices = document.getElementById('services');
+      var subTotalInput = document.getElementById('subTotalInput');
       var summaryDetails = document.getElementById('summary_details');
       var subTotalSpan = document.getElementById('subTotal');
       var subTotal = 0;
@@ -976,6 +978,7 @@ x-init="() => {
          console.log(e)
          subTotal += parseFloat(e.price);
          subTotalSpan.innerHTML = "$"+parseFloat(subTotal).toLocaleString();
+         subTotalInput.value = subTotal;
          // allServices = allServices.map(item =>
          //    item.id === e.value ? { ...item, selected: true } : item
          // );
