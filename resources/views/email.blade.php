@@ -43,7 +43,7 @@ Invoice
                 <td style="padding-bottom: 16px;"></td>
             </tr>
             <tr>
-                <td colspan="4" style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">$48.99 due {{ date("F j, Y") }}</td>
+                <td colspan="4" style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">{{ $data['totalAmount']}} {{ date("F j, Y") }}</td>
             </tr>
             <tr>
                 <td colspan="4">

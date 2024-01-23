@@ -7,6 +7,7 @@ use Mail;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use App\Models\Services;
+use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -46,9 +47,24 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
-        /* return $request->all(); */
+    
+      /*   return $request->all();  */
         $selectedServices = Services::whereIn("id", $request->services)->get();
-        /* return $selectedServices; */
+        /* $customer = new Customer();
+        $customer->created_by = 1;
+        $customer->fullname = $request->fullName;
+        $customer->email_one = $request->email1;
+        $customer->email_two = $request->email2;
+        $customer->billing_address = $request->billingAddress;
+        $customer->country = $request->country;
+        $customer->city = $request->city;
+        $customer->post_code = $request->postCode;
+        $customer->payment_type = $request->typeOfPayment;
+        $customer->service_id = $request->serviceId;
+        $customer->status = "pending";
+        $customer->request->totalAmount;
+        $customer->request->subTotal;
+        $customer->save(); */
         $email = $request->input('email1'); 
         $ccEmail = "ruseltayong@gmail.com";
         $mailData = $request->all();
