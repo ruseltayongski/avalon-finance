@@ -19,6 +19,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "alpinejs": "^3.13.4",
         "tailgrids": "^2.1.0",
         "tailwindcss-animated": "^1.0.1"
     }

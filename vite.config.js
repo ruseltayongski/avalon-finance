@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/theme-switcher.js',
+                'resources/js/alpine.js',
             ],
             refresh: true,
         }),

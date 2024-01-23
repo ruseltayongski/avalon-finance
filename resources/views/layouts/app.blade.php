@@ -9,10 +9,8 @@
 
     <title>{{ config('app.name', 'Avalon Finance') }}</title>
 
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/theme-switcher.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/theme-switcher.js', 'resources/js/alpine.js'])
 
     <style>
         .loading-container {
@@ -26,7 +24,6 @@
             width: 100%;
             background-color: #011523;
             z-index: 1000;
-         
         }
 
         .avalon-logo {

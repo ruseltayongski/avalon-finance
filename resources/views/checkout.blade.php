@@ -582,64 +582,64 @@ x-init="() => {
                </h3>
                <div
                   class="mb-10 overflow-hidden rounded-[10px] bg-white dark:bg-dark-2 shadow-testimonial-6 dark:shadow-box-dark py-10 px-6 sm:px-10
-                  animate-fade-left animate-duration-1000 animate-delay-500
-                  "
-                  >
-                  <div class="flex items-center mb-9">
-                     <div
-                        class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
-                        >
-                        <img
-                           src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/checkout/checkout-04/product-01.jpg"
-                           alt="product"
-                           class="object-cover object-center w-full h-full"
-                           />
+                  animate-fade-left animate-duration-1000 animate-delay-500">
+                  <div id="summary_details">
+                     <div class="flex items-center mb-9">
+                        <div
+                           class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
+                           >
+                           <img
+                              src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/checkout/checkout-04/product-01.jpg"
+                              alt="product"
+                              class="object-cover object-center w-full h-full"
+                              />
+                        </div>
+                        <div class="w-full">
+                           <p
+                              class="mb-[6px] text-base font-medium text-dark dark:text-white"
+                              >
+                              Trendy Ladies Pants
+                           </p>
+                           <p
+                              class="text-sm font-medium text-body-color dark:text-dark-6"
+                              >
+                              $59.99
+                           </p>
+                           <p
+                              class="text-sm font-medium text-body-color dark:text-dark-6"
+                              >
+                              <span class="pr-0.5"> Quantity: </span> <span>1</span>
+                           </p>
+                        </div>
                      </div>
-                     <div class="w-full">
-                        <p
-                           class="mb-[6px] text-base font-medium text-dark dark:text-white"
+                     {{-- <div class="flex items-center mb-9">
+                        <div
+                           class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
                            >
-                           Trendy Ladies Pants
-                        </p>
-                        <p
-                           class="text-sm font-medium text-body-color dark:text-dark-6"
-                           >
-                           $59.99
-                        </p>
-                        <p
-                           class="text-sm font-medium text-body-color dark:text-dark-6"
-                           >
-                           <span class="pr-0.5"> Quantity: </span> <span>1</span>
-                        </p>
-                     </div>
-                  </div>
-                  <div class="flex items-center mb-9">
-                     <div
-                        class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
-                        >
-                        <img
-                           src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/checkout/checkout-04/product-02.jpg"
-                           alt="product"
-                           class="object-cover object-center w-full h-full"
-                           />
-                     </div>
-                     <div class="w-full">
-                        <p
-                           class="mb-[6px] text-base font-medium text-dark dark:text-white"
-                           >
-                           Men's Sendo T-shirt
-                        </p>
-                        <p
-                           class="text-sm font-medium text-body-color dark:text-dark-6"
-                           >
-                           $80.99
-                        </p>
-                        <p
-                           class="text-sm font-medium text-body-color dark:text-dark-6"
-                           >
-                           <span class="pr-0.5"> Quantity: </span> <span>2</span>
-                        </p>
-                     </div>
+                           <img
+                              src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/checkout/checkout-04/product-02.jpg"
+                              alt="product"
+                              class="object-cover object-center w-full h-full"
+                              />
+                        </div>
+                        <div class="w-full">
+                           <p
+                              class="mb-[6px] text-base font-medium text-dark dark:text-white"
+                              >
+                              Men's Sendo T-shirt
+                           </p>
+                           <p
+                              class="text-sm font-medium text-body-color dark:text-dark-6"
+                              >
+                              $80.99
+                           </p>
+                           <p
+                              class="text-sm font-medium text-body-color dark:text-dark-6"
+                              >
+                              <span class="pr-0.5"> Quantity: </span> <span>2</span>
+                           </p>
+                        </div>
+                     </div> --}}
                   </div>
                   <div class="pt-6 border-t border-stroke dark:border-dark-3">
                      <p
@@ -648,18 +648,6 @@ x-init="() => {
                         <span>Subtotal</span>
                         <span class="font-medium"> $140.98 </span>
                      </p>
-                  {{--    <p
-                        class="mb-[10px] flex items-center justify-between text-base text-dark dark:text-white"
-                        >
-                        <span>Shipping Cost</span>
-                        <span class="font-medium"> $10.99 </span>
-                     </p> --}}
-                    {{--  <p
-                        class="flex items-center justify-between mb-5 text-base text-dark dark:text-white"
-                        >
-                        <span>Discount</span>
-                        <span class="font-medium"> $5.00 </span>
-                     </p> --}}
                   </div>
                   <div class="pt-5 border-t border-stroke dark:border-dark-3">
                      <p
@@ -895,32 +883,40 @@ x-init="() => {
 
 <script>
    function addValues() {
-         var select = document.getElementById('services');
+      var select = document.getElementById('services');
 
-         // Array of values to be added
-         var valuesToAdd = ['Option 1', 'Option 2', 'Option 3'];
+      // Array of values to be added
+      var valuesToAdd = ['Option 1', 'Option 2', 'Option 3'];
 
-         // Loop through the values and add them to the select
-         for (var i = 0; i < valuesToAdd.length; i++) {
-               var option = document.createElement('option');
-               option.value = i;
-               option.text = valuesToAdd[i];
+      // Loop through the values and add them to the select
+      for (var i = 0; i < valuesToAdd.length; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.text = valuesToAdd[i];
 
-               // You can preselect certain options by setting the 'selected' property
-               // For example, preselect 'Option 2'
-               if (valuesToAdd[i] === 'Option 2' || valuesToAdd[i] === 'Option 3') {
-                  option.selected = true;
-               }
-
-               console.log(option)
-               select.add(option);
-         }
+            // You can preselect certain options by setting the 'selected' property
+            // For example, preselect 'Option 2'
+            if (valuesToAdd[i] === 'Option 2' || valuesToAdd[i] === 'Option 3') {
+               option.selected = true;
+            }
+            console.log(option)
+            select.add(option);
       }
+   }
 
-      // Call the function to add values
-      //addValues();
+   function selectedOptions(e) {
+      var select = document.getElementById('services');
+      var option = document.createElement('option');
+      option.value = e.label;
+      option.text = e.label;
+      option.selected = true;
+      select.add(option);
+   }
 
+   //addValues();
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
+      var selectServices = document.getElementById('services');
+      var categoryServices = [];
       var n = null,
          l = null,
          d = null,
@@ -949,7 +945,8 @@ x-init="() => {
             const data = (await response.json()).map(item => ({
                value: item.id,
                label: item.title,
-               selected: false
+               selected: false,
+               picture: item.picture
             }));
             l = data;
          } catch (error) {
@@ -963,16 +960,23 @@ x-init="() => {
             //console.log(search)
             await fetchServicesData("{{ asset('services') }}"+"/"+e);
          }
-         console.log(l)
          for (var t of ((v.innerHTML = ""), l)) {
             if (t.selected) {
                !w(t.value) && g(t);
             }
             else {
                const n = document.createElement("li");
-               (n.innerHTML = t.label);
-               (n.dataset.value = t.value);
+               n.innerHTML = t.label;
+               //n.dataset.value = t.value;
+               n.value = t.value;
                v.appendChild(n);
+               const optionExist = selectServices.querySelector(`[value="${t.value}"]`);
+               if(!optionExist) {
+                  var option = document.createElement('option');
+                  option.value = t.value;
+                  option.text = t.label;
+                  selectServices.add(option);
+               }
             }
          }
          L();
@@ -980,34 +984,15 @@ x-init="() => {
 
       function g(e) {
          console.log(e)
-         // for (var i = 0; i < 100; i++) {
-         //    var select = document.getElementById('services');
-         //    var option = document.createElement('option');
-         //    option.value = i+"|haha";
-         //    option.text = i;
-         //    option.selected = e.selected;
-         //    console.log(option)
-         //    select.add(option);
-         // }
-
-         var select = document.getElementById('services');
-         var option = document.createElement('option');
-         option.value = e.value;
-         option.text = e.label;
-         option.selected = e.selected;
-         console.log(option)
-         select.add(option);
-
-
          const t = document.createElement("div");
          t.classList.add("item-container"), (t.style.color = m.textColor || "#2c7a7b"), (t.style.borderColor = m.borderColor || "#81e6d9"), (t.style.background = m.bgColor || "#e6fffa");
          const n = document.createElement("option");
          n.classList.add("item-label");
          n.style.color = m.textColor || "#2c7a7b"; 
          n.innerHTML = e.label;
-         n.dataset.value = e.value;
+         //n.dataset.value = e.value;
          // n.text = e.label;
-         // n.value = e.value;
+         n.value = e.value;
          //n.selected = e.selected;
          //console.log(n);
          const d = new DOMParser().parseFromString(
@@ -1017,10 +1002,13 @@ x-init="() => {
 
          d.addEventListener("click", (t) => {
                (l.find((t) => t.value == e.value).selected = !1), C(e.value), f(), E();
-         }),
-               t.appendChild(n),
-               t.appendChild(d),
-               o.append(t);
+         });
+
+         t.appendChild(n);
+         t.appendChild(d);
+         o.append(t);
+
+         categoryServices = [...categoryServices, ...l];
       }
 
       function L() {
@@ -1028,7 +1016,12 @@ x-init="() => {
          for (var e of v.children) {
             if(e) {
                e.addEventListener("click", (e) => {
-                  (l.find((t) => t.value == e.target.dataset.value).selected = !0), (c.value = null), f(), E(), c.focus();
+                  //(l.find((t) => t.value == e.target.dataset.value).selected = !0), (c.value = null), f(), E(), c.focus();
+                  (l.find((t) => t.value == e.target.value).selected = !0);
+                  c.value = null;
+                  f();
+                  E();
+                  c.focus();
                });
             }
          }  
@@ -1036,7 +1029,8 @@ x-init="() => {
 
       function w(e) {
          for (var t of o.children) {
-            if (!t.classList.contains("input-body") && t.firstChild.dataset.value == e) {
+            // if (!t.classList.contains("input-body") && t.firstChild.dataset.value == e) {
+            if (!t.classList.contains("input-body") && t.firstChild.value == e) {
                return !0; //true
             }
          }
@@ -1044,80 +1038,102 @@ x-init="() => {
       }
 
       function C(e) {
-         for (var t of o.children) t.classList.contains("input-body") || t.firstChild.dataset.value != e || o.removeChild(t);
+         //for (var t of o.children) t.classList.contains("input-body") || t.firstChild.dataset.value != e || o.removeChild(t);
+         for (var t of o.children) t.classList.contains("input-body") || t.firstChild.value != e || o.removeChild(t);
       }
 
       function E(e = !0) {
          try {
             selected_values = [];
-            for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
-               e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
+            // for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
+            //    e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
+            for (var index = 0; index < categoryServices.length; index++) {
+               n.options[index].selected = categoryServices[index].selected;
+               if (categoryServices[index].selected) {
+                  console.log(n.options[index])
+                  selected_values.push({
+                        label: categoryServices[index].label,
+                        value: categoryServices[index].value
+                  });
+               }
+            }
+            if (e && t.hasOwnProperty("onChange")) {
+               t.onChange(selected_values);
+            }
+            // console.log(l);
+            //console.log(selected_values);
+            return;
          } catch(e) {}
       }
 
       (n = document.getElementById(e)),
-         (function () {
-               (l = [...n.options].map((e) => ({ value: e.value, label: e.label, selected: e.selected }))),
-                  n.classList.add("hidden"),
-                  (d = document.createElement("div")).classList.add("mult-select-tag"),
-                  (a = document.createElement("div")).classList.add("wrapper"),
-                  (i = document.createElement("div")).classList.add("body"),
-                  t.shadow && i.classList.add("shadow"),
-                  t.rounded && i.classList.add("rounded"),
-                  (o = document.createElement("div")).classList.add("input-container"),
-                  (c = document.createElement("input")).classList.add("input"),
-                  (c.placeholder = `${t.placeholder || "Search..."}`),
-                  (r = document.createElement("inputBody")).classList.add("input-body"),
-                  r.append(c),
-                  i.append(o),
-                  (s = document.createElement("div")).classList.add("btn-container"),
-                  ((u = document.createElement("button")).type = "button"),
-                  s.append(u);
-               const e = h.parseFromString(
-                  '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n            <polyline points="18 15 12 21 6 15"></polyline></svg>',
-                  "image/svg+xml"
-               ).documentElement;
-               u.append(e),
-                  i.append(s),
-                  a.append(i),
-                  (p = document.createElement("div")).classList.add("drawer", "hidden"),
-                  t.shadow && p.classList.add("shadow"),
-                  t.rounded && p.classList.add("rounded"),
-                  p.append(r),
-                  (v = document.createElement("ul")),
-                  p.appendChild(v),
-                  d.appendChild(a),
-                  d.appendChild(p),
-                  n.nextSibling ? n.parentNode.insertBefore(d, n.nextSibling) : n.parentNode.appendChild(d);
-         })(),
-         f(),
-         L(),
-         E(!1)
-         ,
-         u.addEventListener("click", () => {
-            p.classList.contains("hidden") && (f(), L(), p.classList.remove("hidden"), c.focus());
-            //p.classList.contains("hidden") && (f(), p.classList.remove("hidden"), c.focus());
-         })
-         ,
-         c.addEventListener("keyup", (e) => {
-            clearTimeout(keyupTimeout);
-            keyupTimeout = setTimeout(() => {
-               f(e.target.value, "search");
-               //L();
-            }, 1000);
-         })
-         ,
-         c.addEventListener("keydown", (e) => {
-            if ("Backspace" === e.key && !e.target.value && o.childElementCount > 1) {
-               const e = i.children[o.childElementCount - 2].firstChild;
-               (l.find((t) => t.value == e.dataset.value).selected = !1), C(e.dataset.value), E();
-            }
-         })
-         ,
-         window.addEventListener("click", (e) => {
-            d.contains(e.target) || p.classList.add("hidden");
-         });
-   
+      
+      (function () {
+            (l = [...n.options].map((e) => ({ value: e.value, label: e.label, selected: e.selected }))),
+               n.classList.add("hidden"),
+               (d = document.createElement("div")).classList.add("mult-select-tag"),
+               (a = document.createElement("div")).classList.add("wrapper"),
+               (i = document.createElement("div")).classList.add("body"),
+               t.shadow && i.classList.add("shadow"),
+               t.rounded && i.classList.add("rounded"),
+               (o = document.createElement("div")).classList.add("input-container"),
+               (c = document.createElement("input")).classList.add("input"),
+               (c.placeholder = `${t.placeholder || "Search..."}`),
+               (r = document.createElement("inputBody")).classList.add("input-body"),
+               r.append(c),
+               i.append(o),
+               (s = document.createElement("div")).classList.add("btn-container"),
+               ((u = document.createElement("button")).type = "button"),
+               s.append(u);
+            const e = h.parseFromString(
+               '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n            <polyline points="18 15 12 21 6 15"></polyline></svg>',
+               "image/svg+xml"
+            ).documentElement;
+            u.append(e),
+               i.append(s),
+               a.append(i),
+               (p = document.createElement("div")).classList.add("drawer", "hidden"),
+               t.shadow && p.classList.add("shadow"),
+               t.rounded && p.classList.add("rounded"),
+               p.append(r),
+               (v = document.createElement("ul")),
+               p.appendChild(v),
+               d.appendChild(a),
+               d.appendChild(p),
+               n.nextSibling ? n.parentNode.insertBefore(d, n.nextSibling) : n.parentNode.appendChild(d);
+      })()
+      ,
+      f()
+      ,
+      L()
+      ,
+      E(!1)
+      ,
+      u.addEventListener("click", () => {
+         p.classList.contains("hidden") && (f(), L(), p.classList.remove("hidden"), c.focus());
+         //p.classList.contains("hidden") && (f(), p.classList.remove("hidden"), c.focus());
+      })
+      ,
+      c.addEventListener("keyup", (e) => {
+         clearTimeout(keyupTimeout);
+         keyupTimeout = setTimeout(() => {
+            f(e.target.value, "search");
+            //L();
+         }, 1000);
+      })
+      ,
+      c.addEventListener("keydown", (e) => {
+         if ("Backspace" === e.key && !e.target.value && o.childElementCount > 1) {
+            const e = i.children[o.childElementCount - 2].firstChild;
+            //(l.find((t) => t.value == e.dataset.value).selected = !1), C(e.dataset.value), E();
+            (l.find((t) => t.value == e.value).selected = !1), C(e.value), E();
+         }
+      })
+      ,
+      window.addEventListener("click", (e) => {
+         d.contains(e.target) || p.classList.add("hidden");
+      });
+      
       return {
          f: f,
       };
