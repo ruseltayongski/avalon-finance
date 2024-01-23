@@ -26,6 +26,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    // public function __construct() {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
         return view('home');
@@ -41,7 +46,7 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
-        return $request->all();
+        return Services::whereIn("id", $request->services)->get();
         $email = $request->input('email1'); 
         $ccEmail = "ruseltayong@gmail.com";
         dispatch(new SendInvoice($email, $ccEmail, $request->all()));
