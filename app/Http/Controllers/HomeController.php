@@ -72,7 +72,8 @@ class HomeController extends Controller
         $customer->save();
 
         $mailData = $request->all();
-        dispatch(new SendInvoice($email, $ccEmail, $mailData, $selectedServices));
+        Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices));
+
         
         return redirect()->back()->with('message', 'Invoice sent successfully!');
     }
