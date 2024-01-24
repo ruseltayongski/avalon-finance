@@ -50,6 +50,7 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
+        //return $request->all();
         $user = Auth::user();
         $selectedServices = Services::whereIn("id", $request->services)->get();
         $customer = new Customer();

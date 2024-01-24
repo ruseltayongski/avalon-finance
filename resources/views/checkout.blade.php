@@ -360,8 +360,7 @@
 <section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]"  x-data="{
    isMobile2: window.innerWidth <= 640,
    sendInvoice: true,  
-   thruPhoneProcess: false,
-   totalAmount: 0
+   thruPhoneProcess: false
 }"
 x-init="() => {
    window.addEventListener('resize', () => {
@@ -563,23 +562,23 @@ x-init="() => {
                            
                            <div class="w-full px-4 md:w-1/2">
                               <div class="mb-5">
-                                 <label
+                                 {{-- <label
                                     for=""
                                     class="mb-2.5 block text-base font-medium text-dark dark:text-white"
                                     >
                                  Total Amount to be Processed<span class="text-red">*</span>
-                                 </label>
+                                 </label> --}}
                                  <input
-                                    type="text"
+                                    type="hidden"
                                     class="w-full rounded-md bg-transparent border border-stroke dark:border-dark-3 py-3 px-5 text-body-color dark:text-dark-5 placeholder:text-dark-5 outline-none transition focus:border-[#011523] active:border-[#011523] disabled:cursor-default disabled:bg-[#F5F7FD]"
                                     name="totalAmount"
-                                    x-model="totalAmount"
+                                    id="totalAmountInput"
                                     />
                               </div>
                            </div>
 
                            <div class="w-full px-4 md:w-full">
-                              <div class="mb-8">
+                              <div class="mb-4">
                                  <label
                                     for=""
                                     class="mb-2.5 block text-base font-medium text-dark dark:text-white"
@@ -587,12 +586,8 @@ x-init="() => {
                                     Service/s Availed<span class="text-red">*</span>
                                  </label>
                                  <select name="services[]" id="services" multiple>
-                                    {{-- <option value="1">haha</option>
-                                    <option value="2">huhu</option>
-                                    <option value="3">zzzz</option> --}}
                                  </select>
                               </div>
-                              <hr class="border-1 border-500 cursor-pointer  duration-500 mb-8" />
                            </div>
 
                            <div class="w-full px-4 md:w-full">
@@ -654,62 +649,6 @@ x-init="() => {
                   class="mb-10 overflow-hidden rounded-[10px] bg-white dark:bg-dark-2 shadow-testimonial-6 dark:shadow-box-dark py-10 px-6 sm:px-10
                   animate-fade-left animate-duration-1000 animate-delay-500">
                   <div id="summary_details">
-                     {{-- <div class="flex items-center mb-9">
-                        <div
-                           class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
-                           >
-                           <img
-                              src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/checkout/checkout-04/product-01.jpg"
-                              alt="product"
-                              class="object-cover object-center w-full h-full"
-                              />
-                        </div>
-                        <div class="w-full">
-                           <p
-                              class="mb-[6px] text-base font-medium text-dark dark:text-white"
-                              >
-                              Trendy Ladies Pants
-                           </p>
-                           <p
-                              class="text-sm font-medium text-body-color dark:text-dark-6"
-                              >
-                              $59.99
-                           </p>
-                           <p
-                              class="text-sm font-medium text-body-color dark:text-dark-6"
-                              >
-                              <span class="pr-0.5"> Quantity: </span> <span>1</span>
-                           </p>
-                        </div>
-                     </div> --}}
-                     {{-- <div class="flex items-center mb-9">
-                        <div
-                           class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3"
-                           >
-                           <img
-                              src="https://cdn.tailgrids.com/1.0/assets/images/ecommerce/checkout/checkout-04/product-02.jpg"
-                              alt="product"
-                              class="object-cover object-center w-full h-full"
-                              />
-                        </div>
-                        <div class="w-full">
-                           <p
-                              class="mb-[6px] text-base font-medium text-dark dark:text-white"
-                              >
-                              Men's Sendo T-shirt
-                           </p>
-                           <p
-                              class="text-sm font-medium text-body-color dark:text-dark-6"
-                              >
-                              $80.99
-                           </p>
-                           <p
-                              class="text-sm font-medium text-body-color dark:text-dark-6"
-                              >
-                              <span class="pr-0.5"> Quantity: </span> <span>2</span>
-                           </p>
-                        </div>
-                     </div> --}}
                   </div>
                   <div class="pt-6 border-t border-stroke dark:border-dark-3">
                      <p class="mb-[10px] flex items-center justify-between text-base text-dark dark:text-white">
@@ -717,10 +656,16 @@ x-init="() => {
                         <span class="font-medium" id="subTotal"></span>
                      </p>
                   </div>
+                  <div class="pt-6 border-t border-stroke dark:border-dark-3">
+                     <p class="mb-[10px] flex items-center justify-between text-base text-dark dark:text-white">
+                        <span>Discount</span>
+                        <span class="font-medium" id="discount"></span>
+                     </p>
+                  </div>
                   <div class="pt-5 border-t border-stroke dark:border-dark-3">
                      <p class="flex items-center justify-between mb-6 text-base text-dark dark:text-white">
                         <span>Total Amount</span>
-                        <span class="font-medium" x-text="'$'+(parseFloat(totalAmount.toString().replace(/,/g, '')).toLocaleString())"></span>
+                        <span class="font-medium" id="totalAmountSpan"></span>
                      </p>
                   </div>
                </div>
@@ -954,6 +899,20 @@ x-init="() => {
    var summaryDetails = document.getElementById('summary_details');
    var subTotalSpan = document.getElementById('subTotal');
    var subTotal = 0;
+   var totalAmountSpan = document.getElementById('totalAmountSpan');
+   var totalAmountInput = document.getElementById('totalAmountInput');
+   var totalAmount = 0;
+
+   function calculateTotalAmount(e, option) {
+      if(option == 'add') {
+         totalAmount += parseFloat(e.price);
+      } 
+      else if(option == 'minus') {
+         totalAmount -= parseFloat(e.price);
+      }
+      totalAmountSpan.innerHTML = "$"+parseFloat(totalAmount).toLocaleString();
+      totalAmountInput.value = totalAmount;
+   }
 
    function calculateSubTotal(e) {
       subTotal += parseFloat(e.price);
@@ -1066,6 +1025,7 @@ x-init="() => {
       function g(e) {
          calculateSubTotal(e);
          displayTheSummary(e);
+         calculateTotalAmount(e, 'add')
  
          const t = document.createElement("div");
          t.classList.add("item-container"), (t.style.color = m.textColor || "#2c7a7b"), (t.style.borderColor = m.borderColor || "#81e6d9"), (t.style.background = m.bgColor || "#e6fffa");
@@ -1091,6 +1051,7 @@ x-init="() => {
             f();
             deductSubTotal(e);
             deleteSummaryById(e);
+            calculateTotalAmount(e, 'minus')
          });
 
          t.appendChild(n);
@@ -1218,6 +1179,8 @@ x-init="() => {
    
    new MultiSelectTag('services');
 
+   var discountSpan = document.getElementById('discount');
+   var discount = 0;
    function MultiSelectPromoCode (el, customs = {shadow: false, rounded:true}) {
       var element = null
       var options = null
@@ -1378,7 +1341,10 @@ x-init="() => {
 
       function createTag(option) {
          console.log(option)
-         deductSubTotal(option)
+         //deductSubTotal(option)
+         calculateTotalAmount(option, 'minus')
+         discount += parseFloat(option.price);
+         discountSpan.innerHTML = "$"+parseFloat(discount).toLocaleString();
 
          // Create and show selected item as tag
          const itemDiv = document.createElement('div');
@@ -1402,7 +1368,10 @@ x-init="() => {
                removeTag(option.value)
                initOptions()
                setValues()
-               calculateSubTotal(option)
+               //calculateSubTotal(option)
+               calculateTotalAmount(option, 'add')
+               discount -= parseFloat(option.price);
+               discountSpan.innerHTML = "$"+parseFloat(discount).toLocaleString();
          })
       
          itemDiv.appendChild(itemLabel)
