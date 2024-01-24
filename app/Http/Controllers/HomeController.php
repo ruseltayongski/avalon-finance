@@ -29,10 +29,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    // public function __construct() {
-    //     $this->middleware('auth');
-    // }
-
     public function index()
     {
         return view('home');
@@ -40,15 +36,15 @@ class HomeController extends Controller
 
     public function checkout() 
     {
-        $services = Services::select("id","title",DB::raw("false as selected"),"picture")->get();
-        return view('checkout',[
-            'services' => $services
-        ]);
+        return view('checkout');
+        // $services = Services::select("id","title",DB::raw("false as selected"),"picture")->get();
+        // return view('checkout',[
+        //     'services' => $services
+        // ]);
     }
 
     public function sendEmail(Request $request) 
     {
-    
       /*   return $request->all();  */
         $selectedServices = Services::whereIn("id", $request->services)->get();
         /* $customer = new Customer();

@@ -905,16 +905,6 @@ x-init="() => {
       }
    }
 
-   function selectedOptions(e) {
-      var select = document.getElementById('services');
-      var option = document.createElement('option');
-      option.value = e.label;
-      option.text = e.label;
-      option.selected = true;
-      select.add(option);
-   }
-
-   //addValues();
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
       var selectServices = document.getElementById('services');
       var subTotalInput = document.getElementById('subTotalInput');
@@ -922,7 +912,6 @@ x-init="() => {
       var subTotalSpan = document.getElementById('subTotal');
       var subTotal = 0;
       var categoryServices = [];
-      var allServices = @json($services);
       var n = null,
          l = null,
          d = null,
@@ -989,21 +978,21 @@ x-init="() => {
          L();
       }
 
-      function g(e) {
-         console.log(e)
+      function calculateSubTotal(e) {
          subTotal += parseFloat(e.price);
          subTotalSpan.innerHTML = "$"+parseFloat(subTotal).toLocaleString();
          subTotalInput.value = subTotal;
-         // allServices = allServices.map(item =>
-         //    item.id === e.value ? { ...item, selected: true } : item
-         // );
-         //console.log(allServices)
-         
-         // Create a temporary div element
-         var tempDiv = document.createElement('div');
+      }
 
-         // Set the innerHTML of the temporary div with your HTML string
-         tempDiv.innerHTML = `<div class="flex items-center mb-9">
+      function deductSubTotal(e) {
+         subTotal -= parseFloat(e.price);
+         subTotalSpan.innerHTML = "$"+parseFloat(subTotal).toLocaleString();
+         subTotalInput.value = subTotal;
+      }
+
+      function displayTheSummary(e) {
+         var tempDiv = document.createElement('div');
+         tempDiv.innerHTML = `<div data-id="${e.value}" class="flex items-center mb-9">
                                  <div class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3">
                                     <img src="https://avalonhouse.us/fileupload/services/${e.picture}" alt="product" class="object-cover object-center w-full h-full">
                                  </div>
@@ -1022,7 +1011,17 @@ x-init="() => {
 
          // Append the child element (tempDiv) to the summaryDetails
          summaryDetails.appendChild(tempDiv.firstChild);
+      }
 
+      function deleteSummaryById(e) {
+         var summaryElement = Array.from(summaryDetails.children).find(element => element.getAttribute('data-id') == e.value);
+         summaryDetails.removeChild(summaryElement);
+      }
+
+      function g(e) {
+         calculateSubTotal(e);
+         displayTheSummary(e);
+ 
          const t = document.createElement("div");
          t.classList.add("item-container"), (t.style.color = m.textColor || "#2c7a7b"), (t.style.borderColor = m.borderColor || "#81e6d9"), (t.style.background = m.bgColor || "#e6fffa");
          const n = document.createElement("option");
@@ -1040,7 +1039,13 @@ x-init="() => {
          ).documentElement;
 
          d.addEventListener("click", (t) => {
-               (l.find((t) => t.value == e.value).selected = !1), C(e.value), f(), E();
+            //(l.find((t) => t.value == e.value).selected = !1), C(e.value), f(), E();
+            e.selected = false;
+            toggleSelect(e)
+            C(e.value);
+            f();
+            deductSubTotal(e);
+            deleteSummaryById(e);
          });
 
          t.appendChild(n);
@@ -1048,7 +1053,14 @@ x-init="() => {
          o.append(t);
 
          categoryServices = [...categoryServices, ...l];
-         console.log(categoryServices)
+
+         toggleSelect(e)
+      }
+
+      function toggleSelect(e) {
+         console.log(e)
+         const optionExist = selectServices.querySelector(`[value="${e.value}"]`);
+         optionExist.selected = e.selected;
       }
 
       function L() {
@@ -1083,38 +1095,7 @@ x-init="() => {
       }
 
       function E(e = !0) {
-         //selected_values = [];
-         // for (var index = 0; index < allServices.length; index++) {
-         //    if (allServices[index]['selected'] && n.options[index]) {
-         //       n.options[index]['selected'] = true;
-         //       console.log(n.options[index])
-         //    }
-         // }
-         // //console.log(allServices);
-         try {
-            selected_values = [];
-            // for (var d = 0; d < l.length; d++) (n.options[d].selected = l[d].selected), l[d].selected && selected_values.push({ label: l[d].label, value: l[d].value });
-            //    e && t.hasOwnProperty("onChange") && t.onChange(selected_values);
-            for (var index = 0; index < categoryServices.length; index++) {
-               if (categoryServices[index].selected) {
-                  //n.options[index].selected = categoryServices[index].selected;
-                  const optionExist = n.querySelector(`[value="${categoryServices[index].value}"]`);
-                  optionExist.selected = true;
-                  //console.log(optionExist)
-                  //console.log(n.options[index])
-                  selected_values.push({
-                        label: categoryServices[index].label,
-                        value: categoryServices[index].value
-                  });
-               }
-            }
-            if (e && t.hasOwnProperty("onChange")) {
-               t.onChange(selected_values);
-            }
-            // console.log(l);
-            //console.log(selected_values);
-            return;
-         } catch(e) {}
+
       }
 
       (n = document.getElementById(e)),
