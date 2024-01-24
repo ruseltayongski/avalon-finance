@@ -642,7 +642,7 @@ x-init="() => {
                   <div class="pt-5 border-t border-stroke dark:border-dark-3">
                      <p class="flex items-center justify-between mb-6 text-base text-dark dark:text-white">
                         <span>Total Amount</span>
-                        <span class="font-medium" x-text="'$'+(parseFloat(totalAmount).toLocaleString())"></span>
+                        <span class="font-medium" x-text="'$'+(parseFloat(totalAmount.toString().replace(/,/g, '')).toLocaleString())"></span>
                      </p>
                   </div>
                </div>
