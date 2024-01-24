@@ -50,7 +50,6 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
-        //return $request->all();
         $user = Auth::user();
         $selectedServices = Services::whereIn("id", $request->services)->get();
         $customer = new Customer();
@@ -70,13 +69,13 @@ class HomeController extends Controller
        
         $email = $request->input('email1'); 
         $ccEmail = "ruseltayong@gmail.com";
-
-        dispatch(new SendInvoice($email, $ccEmail, $customer, $selectedServices));
         $customer->save();
+
+        $mailData = $request->all();
+        dispatch(new SendInvoice($email, $ccEmail, $mailData, $selectedServices));
         
         return redirect()->back()->with('message', 'Invoice sent successfully!');
     }
-
     public function successMail(Request $request) { 
 
         /* return $request->all(); */

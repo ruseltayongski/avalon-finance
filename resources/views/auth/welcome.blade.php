@@ -221,7 +221,7 @@
                            class="mx-auto inline-block max-w-[160px]"
                            >
                         <img
-                           src="{{ asset('images/avalon-logo.png') }}"
+                           src="https://avalonhouse.us/images/avalon-logo.png"
                            alt="logo"
                            />
                         </a>
@@ -237,8 +237,8 @@
                               class="w-full px-5 py-3 text-base bg-transparent border rounded-md outline-none border-stroke text-body-color dark:text-white dark:border-dark-3 focus:border-dark focus-visible:shadow-none"
                               />
                               @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                    <span class="text-sm text-red" role="alert">
+                                        {{ $message }}
                                     </span>
                                 @enderror
                         </div>

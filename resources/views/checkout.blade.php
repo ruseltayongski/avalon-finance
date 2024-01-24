@@ -1,3 +1,7 @@
+<?php 
+   $user = Auth::user();
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -294,14 +298,59 @@
 <div 
     :class="{ 'relative z-10 bg-cover bg-center bg-no-repeat pt-[30px] pb-20 md:pt-[100px]': isMobile, 'z-10 relative bacground-image-hero': !isMobile }"
     :style="isMobile ? 'background-image: url({{ asset('/images/v2crop.png') }})' : ''"> 
-    <div class="absolute right-0 p-7">
-      <a
+    <div class="absolute right-0 top-0">
+      <div class="py-8 px-6 text-center">
+         <div
+            x-data="
+            {
+            dropdownOpen: false
+            }
+            "
+            @click.outside="dropdownOpen = false"
+            class="relative mb-8 inline-block text-left"
+            >
+            <button
+               @click="dropdownOpen = !dropdownOpen"
+               class="bg-dark flex items-center rounded-[5px] px-7 py-[7px] text-sm font-medium text-white"
+               >
+               
+                {{ $user->name }}
+               <span class="pl-4">
+                  <svg 
+                     width="20" 
+                     height="20" 
+                     viewBox="0 0 20 20" 
+                     fill="none" 
+                     xmlns="http://www.w3.org/2000/svg"
+                     class="fill-current"
+                     >
+                     <path 
+                        d="M10 14.25C9.8125 14.25 9.65625 14.1875 9.5 14.0625L2.3125 7C2.03125 6.71875 2.03125 6.28125 2.3125 6C2.59375 5.71875 3.03125 5.71875 3.3125 6L10 12.5312L16.6875 5.9375C16.9688 5.65625 17.4063 5.65625 17.6875 5.9375C17.9687 6.21875 17.9687 6.65625 17.6875 6.9375L10.5 14C10.3437 14.1563 10.1875 14.25 10 14.25Z" 
+                        />
+                  </svg>
+               </span>
+            </button>
+            <div
+               :class="dropdownOpen ? 'top-full opacity-100 visible' : 'top-[110%] invisible opacity-0' "
+               class="shadow-1 dark:shadow-box-dark absolute left-0 z-50 mt-2 w-full rounded-md bg-white dark:bg-dark-2 py-[10px] transition-all"
+               >
+               <a
+                  href="javascript:void(0)"
+                  class="text-body-color dark:text-dark-6  block px-5 py-2 text-base"
+                  onclick="event.preventDefault(); document.getElementById('logout-form1').submit();"
+                  >
+               Logout
+               </a>
+            </div>
+         </div>
+      </div>
+     {{--  <a
          href="{{ route('logout') }}" 
          class="py-2.5 text-base rounded-xl font-medium px-6 bg-dark text-white"
          onclick="event.preventDefault(); document.getElementById('logout-form1').submit();"
          >
       Logout
-      </a>
+      </a> --}}
    <form id="logout-form1" action="{{ route('logout') }}" method="POST">
       @csrf
   </form>
@@ -482,10 +531,10 @@ x-init="() => {
                                        required
                                        >
                                        <option value="" disabled selected hidden> Select Payment Type
-                                       <option value="gcash" class="dark:bg-dark-2">
+                                       <option value="Full" class="dark:bg-dark-2">
                                           Full
                                        </option>
-                                       <option value="uk" class="dark:bg-dark-2">
+                                       <option value="Plan" class="dark:bg-dark-2">
                                           Plan
                                        </option>
                                     </select>
@@ -578,14 +627,13 @@ x-init="() => {
                               <button {{-- @click="cartNotification = true" --}} 
                                  class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
                                  :class="{ 'w-full': isMobile2, 'w-full': !isMobile2 }"   
-                             
+                                 name="sendInvoice"
                                  type="submit"
                                  >
                                  Send Invoice
                               </button>
                            </div>
                         </div>   
-                     </form>
                   </div>
                </div>
             </div>
@@ -806,13 +854,14 @@ x-init="() => {
          </label>
             <div class="flex items-center justify-start space-x-1 mt-5">
                <button
-                  type="button"
-                  disabled
-                  id="proceedButton"
-                  class="disabled-cursor px-5 py-2 text-sm font-medium rounded-md text-white shadow-1 dark:shadow-3 hover:bg-[#011523]/80 dark:text-white dark:bg-white/5"
-                  >
-               Proceed
-               </button>
+               type="submit"
+               disabled
+               name="proceedButton"
+               id="proceedButton"
+               class="disabled-cursor px-5 py-2 text-sm font-medium rounded-md text-white shadow-1 dark:shadow-3 hover:bg-[#011523]/80 dark:text-white dark:bg-white/5"
+               >
+            Proceed
+            </button>
                <button
                   @click="thruPhoneProcess = false"
                   class="px-5 py-2 text-sm font-medium text-dark dark:text-white rounded-md bg-[white] dark:bg-dark bg-opacity-50 hover:bg-opacity-50"
@@ -821,6 +870,7 @@ x-init="() => {
                </button>
             </div>
          </div>
+      </form>
       </div>
    </div>
    @if(session('message'))
@@ -893,19 +943,6 @@ x-init="() => {
       </div>
   </div>
    @endif
-   <form action="{{ route('success.email') }}" method="POST">
-      @csrf
-      <input type="hidden" value="trodfil@gmail.com" name="email">
-      <input type="hidden" value="rodfil" name="name">
-      <button {{-- @click="cartNotification = true" --}} 
-         class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
-         :class="{ 'w-full': isMobile2, 'w-full': !isMobile2 }"   
-      
-         type="submit"
-         >
-         Success Email
-      </button>
-   </form>
 </section>
 
 @endsection
