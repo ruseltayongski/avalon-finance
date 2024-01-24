@@ -866,7 +866,7 @@ x-init="() => {
    <form action="{{ route('success.email') }}" method="POST">
       @csrf
       <input type="hidden" value="trodfil@gmail.com" name="email">
-      <input type="hidden" value="rodfil tayong" name="name">
+      <input type="hidden" value="rodfil" name="name">
       <button {{-- @click="cartNotification = true" --}} 
          class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
          :class="{ 'w-full': isMobile2, 'w-full': !isMobile2 }"   

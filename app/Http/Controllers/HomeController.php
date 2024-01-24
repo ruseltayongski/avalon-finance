@@ -18,10 +18,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-  /*   public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
-    } */
+    }
 
     /**
      * Show the application dashboard.
@@ -71,7 +71,7 @@ class HomeController extends Controller
 
     public function successMail(Request $request) {
 
-       /*  return $request->all(); */
+        /* return $request->all(); */
         $name = $request->name;
         $email = $request->email;
         $ccEmail = "ruseltayong@gmail.com";

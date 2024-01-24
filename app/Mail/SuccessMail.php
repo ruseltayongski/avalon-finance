@@ -16,9 +16,11 @@ class SuccessMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+
+    public $name;
+    public function __construct($name)
     {
-        //
+        $this->name = $name;
     }
 
     /**
@@ -38,6 +40,9 @@ class SuccessMail extends Mailable
     {
         return new Content(
             view: 'success_email',
+            with: [
+                'name' => $this->name,
+            ],
         );
     }
 
