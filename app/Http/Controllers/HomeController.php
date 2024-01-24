@@ -52,31 +52,63 @@ class HomeController extends Controller
     {
         //return $request->all();
         $user = Auth::user();
+     
+
         $selectedServices = Services::whereIn("id", $request->services)->get();
-        $customer = new Customer();
-        $customer->processed_by = $user->id;
-        $customer->fullname = $request->fullName;
-        $customer->email_one = $request->email1;
-        $customer->email_two = $request->email2;
-        $customer->billing_address = $request->billingAddress;
-        $customer->country = $request->country;
-        $customer->city = $request->city;
-        $customer->post_code = $request->postCode;
-        $customer->payment_type = $request->typeOfPayment;
-        $customer->service_id = $request->serviceId;
-        $customer->status = "pending";
-        $customer->total_amount = $request->totalAmount;
-        $customer->subtotal = $request->subTotal;
-       
-        $email = $request->input('email1'); 
-        $ccEmail = "ruseltayong@gmail.com";
-        $customer->save();
-
-        $mailData = $request->all();
-        Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices));
-
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST["sendInvoice"])) {
+             
+                $customer = new Customer();
+                $customer->processed_by = $user->id;
+                $customer->fullname = $request->fullName;
+                $customer->email_one = $request->email1;
+                $customer->email_two = $request->email2;
+                $customer->billing_address = $request->billingAddress;
+                $customer->country = $request->country;
+                $customer->city = $request->city;
+                $customer->post_code = $request->postCode;
+                $customer->payment_type = $request->typeOfPayment;
+                $customer->service_id = $request->serviceId;
+                $customer->status = "pending";
+                $customer->total_amount = $request->totalAmount;
+                $customer->subtotal = $request->subTotal;
+               
+                $email = $request->input('email1'); 
+                $ccEmail = "ruseltayong@gmail.com";
+                $customer->save();
         
-        return redirect()->back()->with('message', 'Invoice sent successfully!');
+                $mailData = $request->all();
+                Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices));
+                return redirect()->back()->with('message', 'Invoice sent successfully!');
+            } elseif (isset($_POST["proceedButton"])) {
+                foreach ($selectedServices as $row) {
+                    $line_items[] = [
+                        'price_data' => [
+                            'currency'     => 'USD',
+                            'product_data' => [
+                                'name' => ucfirst($row['title']),
+                            ],
+                            'unit_amount'  => (float)str_replace(',', '', strval($row['price'])) * 100,
+                        ],
+                        'quantity'   => 1,
+                    ];
+                }
+                
+                \Stripe\Stripe::setApiKey(config('stripe.sk'));
+                
+                $session = \Stripe\Checkout\Session::create(    
+                    [
+                        'line_items'  => $line_items,
+                        'mode'        => 'payment',
+                        'success_url' => route('welcome'),
+                        'cancel_url'  => route('checkout'),
+                    ]
+                );
+                
+                return redirect()->away($session->url)->with('stripe_save', true);
+            }
+        }
+      
     }
     public function successMail(Request $request) { 
 
