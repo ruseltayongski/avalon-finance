@@ -9,6 +9,7 @@ use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use App\Models\Services;
 use App\Models\Customer;
+use App\Models\PromoCode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,10 @@ class HomeController extends Controller
 
     public function checkout() 
     {
-        return view('checkout');
+        $promoCode = PromoCode::get();
+        return view('checkout',[
+            'promoCode' => $promoCode
+        ]);
         // $services = Services::select("id","title",DB::raw("false as selected"),"picture")->get();
         // return view('checkout',[
         //     'services' => $services
@@ -69,6 +73,7 @@ class HomeController extends Controller
 
         dispatch(new SendInvoice($email, $ccEmail, $customer, $selectedServices));
         $customer->save();
+        
         return redirect()->back()->with('message', 'Invoice sent successfully!');
     }
 
