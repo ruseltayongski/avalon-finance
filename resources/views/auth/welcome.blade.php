@@ -137,6 +137,7 @@
 
 </style>
 @endsection
+
 <div 
     :class="{ 'relative z-10 bg-cover bg-center bg-no-repeat pt-[30px] pb-20 md:pt-[100px]': isMobile, 'z-10 relative bacground-image-hero': !isMobile }"
     :style="isMobile ? 'background-image: url({{ asset('/images/v2crop.png') }})' : ''">
@@ -232,6 +233,7 @@
                               type="email"
                               placeholder="Email"
                               required
+                              name="email"
                               class="w-full px-5 py-3 text-base bg-transparent border rounded-md outline-none border-stroke text-body-color dark:text-white dark:border-dark-3 focus:border-dark focus-visible:shadow-none"
                               />
                               @error('email')
@@ -245,6 +247,7 @@
                               type="password"
                               placeholder="Password"
                               required
+                              name="password"
                               class="w-full px-5 py-3 text-base bg-transparent border rounded-md outline-none border-stroke text-body-color dark:text-white dark:border-dark-3 focus:border-dark focus-visible:shadow-none"
                               />
                         </div>

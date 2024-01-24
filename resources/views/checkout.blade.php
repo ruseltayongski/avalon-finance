@@ -290,9 +290,22 @@
 </style>
 @endsection
 
+
 <div 
     :class="{ 'relative z-10 bg-cover bg-center bg-no-repeat pt-[30px] pb-20 md:pt-[100px]': isMobile, 'z-10 relative bacground-image-hero': !isMobile }"
     :style="isMobile ? 'background-image: url({{ asset('/images/v2crop.png') }})' : ''"> 
+    <div class="absolute right-0 p-7">
+      <a
+         href="{{ route('logout') }}" 
+         class="py-2.5 text-base rounded-xl font-medium px-6 bg-dark text-white"
+         onclick="event.preventDefault(); document.getElementById('logout-form1').submit();"
+         >
+      Logout
+      </a>
+   <form id="logout-form1" action="{{ route('logout') }}" method="POST">
+      @csrf
+  </form>
+    </div>
 </div>
 
 <section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]"  x-data="{
