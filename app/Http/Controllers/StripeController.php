@@ -16,9 +16,6 @@ class StripeController extends Controller
 
     public function session(Request $request)
     {
-        \Stripe\Stripe::setApiKey(config('stripe.sk'));
-        
-
         $line_items = [];
         $services = json_decode($request->input('services'), true);
 
