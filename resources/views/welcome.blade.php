@@ -225,27 +225,36 @@
                            />
                         </a>
                      </div>
-                     <form>
+                     <form action="{{ route('login') }}" method="POST">
+                        @csrf
                         <div class="mb-6">
                            <input
-                              type="text"
+                              type="email"
                               placeholder="Email"
+                              required
                               class="w-full px-5 py-3 text-base bg-transparent border rounded-md outline-none border-stroke text-body-color dark:text-white dark:border-dark-3 focus:border-dark focus-visible:shadow-none"
                               />
+                              @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                         <div class="mb-6">
                            <input
                               type="password"
                               placeholder="Password"
+                              required
                               class="w-full px-5 py-3 text-base bg-transparent border rounded-md outline-none border-stroke text-body-color dark:text-white dark:border-dark-3 focus:border-dark focus-visible:shadow-none"
                               />
                         </div>
                         <div class="mb-10">
-                           <input
+                           <button
                               type="submit"
-                              value="Sign In"
                               class="w-full px-5 py-3 text-base font-medium text-white transition border rounded-md cursor-pointer border-dark bg-dark hover:bg-opacity-90"
-                              />
+                              >
+                              Sign In
+                           </button>
                         </div>
                      </form>
                      <a
