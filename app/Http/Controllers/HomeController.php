@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendInvoice;
+use App\Jobs\SuccessPay;
 use Mail;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
@@ -70,5 +71,16 @@ class HomeController extends Controller
         $mailData = $request->all();
         dispatch(new SendInvoice($email, $ccEmail, $mailData, $selectedServices));
         return redirect()->back()->with('message', 'Invoice sent successfully!');
+    }
+
+    public function successMail(Request $request) {
+
+       /*  return $request->all(); */
+        $name = $request->name;
+        $email = $request->email;
+        $ccEmail = "ruseltayong@gmail.com";
+        dispatch(new SuccessPay($email, $ccEmail, $name));
+
+        return redirect()->back();
     }
 }
