@@ -2,12 +2,12 @@
 
 namespace App\Jobs;
 
+use Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\InvoiceMail;
 use App\Mail\SuccessMail;
 
 class SuccessPay implements ShouldQueue
@@ -19,12 +19,12 @@ class SuccessPay implements ShouldQueue
      */
     protected $email;
     protected $ccEmail;
-    protected $mailData;
-    public function __construct($email, $ccEmail, $mailData)
+    protected $name;
+    public function __construct($email, $ccEmail, $name)
     {
         $this->email = $email;
         $this->ccEmail = $ccEmail;
-        $this->mailData = $mailData;
+        $this->name = $name;
     }
 
     /**
@@ -34,6 +34,6 @@ class SuccessPay implements ShouldQueue
     {
         Mail::to($this->email)
              ->cc($this->ccEmail)
-             ->send(new SuccessMail());
+             ->send(new SuccessMail($this->name));
     }
 }

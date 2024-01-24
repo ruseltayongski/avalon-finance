@@ -75,7 +75,7 @@ class HomeController extends Controller
 
     public function successMail(Request $request) {
 
-       /*  return $request->all(); */
+        /* return $request->all(); */
         $name = $request->name;
         $email = $request->email;
         $ccEmail = "ruseltayong@gmail.com";

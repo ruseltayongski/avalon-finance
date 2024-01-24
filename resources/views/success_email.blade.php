@@ -108,7 +108,7 @@
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <!-- LOGO -->
         <tr>
-            <td bgcolor="#17c964" align="center">
+            <td bgcolor="#011523" align="center">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td align="center" valign="top" style="padding: 40px 10px 40px 10px;"> </td>
@@ -117,11 +117,11 @@
             </td>
         </tr>
         <tr>
-            <td bgcolor="#17c964" align="center" style="padding: 0px 10px 0px 10px;">
+            <td bgcolor="#011523" align="center" style="padding: 0px 10px 0px 10px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
-                        <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                         {{--    <h1 style="font-size: 48px; font-weight: 400; margin: 2;"></h1> --}} <img src=" https://upload.wikimedia.org/wikipedia/en/b/bf/Logo_of_Cebu_Landmasters.jpg" width="150" height="130" style="display: block; border: 0px;" />
+                        <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 10px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
+                         {{--    <h1 style="font-size: 48px; font-weight: 400; margin: 2;"></h1> --}} <img src="https://avalonhouse.us/images/avalon-logo.png" width="150" height="130" style="display: block; border: 0px;" />
                         </td>
                     </tr>
                 </table>
@@ -130,16 +130,12 @@
         <tr>
             <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 42px 10px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                    <tr>
-                        <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 15px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                           {{--  <p style="margin: 0;">Hello {{ implode(' ', array_map('ucfirst', explode(' ', $mailData['userName'] )))}},</p> --}}
-                        </td>
-                    </tr>
+                   
                     <tr>
                         <td bgcolor="#ffffff" style="padding: 20px 30px 10px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0; padding: 0px 0px 20px;">We have received a request to reset the password for your accountss</p>
+                            <p style="margin: 0; padding: 0px 0px 20px;">Hi {{ $name}},</p>
                             
-                            <p style="margin: 0; padding: 0px 0px 20px">To proceed with the password reset, please click on the link below:</p>
+                            <p style="margin: 0; padding: 0px 0px 20px">You have sucessfully pay your services!</p>
                         </td>
                     </tr>
                  
@@ -149,26 +145,7 @@
                             <p style="margin: 0;"><a href="#" target="_blank" style="color: #FFA73B;">https://bit.li.utlddssdstueincx</a></p>
                         </td>
                     </tr> --}}
-                        <tr>
-                            <td bgcolor="#ffffff" align="left">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
-                                            <table border="0" cellspacing="0" cellpadding="0">
-                                                <tr>
-                                                  {{--   <td align="center" style="border-radius: 3px;" bgcolor="#2b80ff"><a href="{{ $mailData['resetLink'] }}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #2b80ff; display: inline-block;">Reset Password</a></td> --}}
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr> 
-                        <tr>
-                            <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 15px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                                <p style="margin: 0;">Please note that this link is valid for 30 minutes, after which you will need to submit another password reset request.</p>
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                                 <p style="margin: 0;">Thank you!</p>
