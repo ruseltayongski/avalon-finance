@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Services;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -46,9 +47,10 @@ class HomeController extends Controller
     public function sendEmail(Request $request) 
     {
         //return $request->all();
+        $user = Auth::user();
         $selectedServices = Services::whereIn("id", $request->services)->get();
-        /* $customer = new Customer();
-        $customer->created_by = 1;
+        $customer = new Customer();
+        $customer->processed_by = $user->id;
         $customer->fullname = $request->fullName;
         $customer->email_one = $request->email1;
         $customer->email_two = $request->email2;
@@ -59,17 +61,18 @@ class HomeController extends Controller
         $customer->payment_type = $request->typeOfPayment;
         $customer->service_id = $request->serviceId;
         $customer->status = "pending";
-        $customer->request->totalAmount;
-        $customer->request->subTotal;
-        $customer->save(); */
+        $customer->total_amount = $request->totalAmount;
+        $customer->subtotal = $request->subTotal;
+       
         $email = $request->input('email1'); 
         $ccEmail = "ruseltayong@gmail.com";
-        $mailData = $request->all();
-        dispatch(new SendInvoice($email, $ccEmail, $mailData, $selectedServices));
+
+        dispatch(new SendInvoice($email, $ccEmail, $customer, $selectedServices));
+        $customer->save();
         return redirect()->back()->with('message', 'Invoice sent successfully!');
     }
 
-    public function successMail(Request $request) {
+    public function successMail(Request $request) { 
 
         /* return $request->all(); */
         $name = $request->name;
