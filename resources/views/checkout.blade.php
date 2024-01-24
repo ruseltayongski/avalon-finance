@@ -560,6 +560,8 @@ x-init="() => {
                </div>
             </div>
          </div>
+
+       
       
          <div class="w-full px-4 lg:w-5/12 xl:w-4/12">
             <div>
@@ -836,12 +838,12 @@ x-init="() => {
             You have successfully sent an invoice
          </p>
          <a
-            href="javascript:void(0)"
+            @click="sendInvoice = false"
             class="inline-block rounded-md border border-white py-3 px-[50px] text-center text-base font-medium text-white transition hover:bg-white hover:text-primary"
             >
           Send Notif to Email
          </a>
-         <button
+        {{--  <button
             @click="sendInvoice = false"
             class="absolute flex items-center justify-center text-white transition bg-white rounded-full top-6 right-6 h-7 w-7 bg-opacity-10 hover:bg-opacity-100 hover:text-primary"
             >
@@ -857,10 +859,23 @@ x-init="() => {
                   class="fill-current stroke-current"
                   />
             </svg>
-         </button>
+         </button> --}}
       </div>
   </div>
    @endif
+   <form action="{{ route('success.email') }}" method="POST">
+      @csrf
+      <input type="hidden" value="trodfil@gmail.com" name="email">
+      <input type="hidden" value="rodfil tayong" name="name">
+      <button {{-- @click="cartNotification = true" --}} 
+         class="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white rounded-md bg-[#011523] hover:bg-[#011523]/90"
+         :class="{ 'w-full': isMobile2, 'w-full': !isMobile2 }"   
+      
+         type="submit"
+         >
+         Success Email
+      </button>
+   </form>
 </section>
 
 @endsection
