@@ -48,6 +48,7 @@ Invoice
             <tr>
                 <td colspan="4">
                     <form action="{{ route('stripe.session') }}" method="GET" target="_blank">
+                        <input type="hidden" name="promoCode" value="{{ htmlspecialchars(implode(', ', (array)$data['promoCode'])) }}">
                         <input type="hidden" name="totalAmount" value="{{ $data['totalAmount'] }}">
                         <input type="hidden" name="services" value="{{ json_encode($services) }}">
                         <button type="submit" style="border: none; background: #011523; color: white; padding: 10px 69px 12px 69px; text-decoration: none; cursor: pointer;">

@@ -38,22 +38,21 @@ class HomeController extends Controller
 
     public function checkout() 
     {
-        $promoCode = PromoCode::get();
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+        $allCoupons = \Stripe\Coupon::all(['limit' => 99999999])->data;
+        $foreverCoupons = array_filter($allCoupons, function ($coupon) {
+            return $coupon->duration === 'forever';
+        });
+
         return view('checkout',[
-            'promoCode' => $promoCode
+            'promoCode' => $foreverCoupons
         ]);
-        // $services = Services::select("id","title",DB::raw("false as selected"),"picture")->get();
-        // return view('checkout',[
-        //     'services' => $services
-        // ]);
     }
 
     public function sendEmail(Request $request) 
     {
-        //return $request->all();
         $user = Auth::user();
-     
-
+    
         $selectedServices = Services::whereIn("id", $request->services)->get();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["sendInvoice"])) {
@@ -80,7 +79,8 @@ class HomeController extends Controller
                 $mailData = $request->all();
                 Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices));
                 return redirect()->back()->with('message', 'Invoice sent successfully!');
-            } elseif (isset($_POST["proceedButton"])) {
+            } 
+            elseif (isset($_POST["proceedButton"])) {
                 foreach ($selectedServices as $row) {
                     $line_items[] = [
                         'price_data' => [

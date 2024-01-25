@@ -600,7 +600,7 @@ x-init="() => {
                                  </label>
                                  <select name="promoCode[]" id="promoCode" multiple>
                                     @foreach($promoCode as $row)
-                                       <option value="{{ $row->id }}" data-discount="{{ $row->discount }}">{{ $row->code }}</option>
+                                       <option value="{{ $row->id }}" data-discount="{{ $row->amount_off / 100 }}">{{ '$'.number_format($row->amount_off / 100, 2) }}</option>
                                     @endforeach
                                  </select>
                               </div>
