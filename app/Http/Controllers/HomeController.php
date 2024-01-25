@@ -112,12 +112,11 @@ class HomeController extends Controller
     }
     public function successMail(Request $request) { 
 
-        /* return $request->all(); */
         $name = $request->name;
         $email = $request->email;
         $ccEmail = "ruseltayong@gmail.com";
         dispatch(new SuccessPay($email, $ccEmail, $name));
 
-        return redirect()->back();
+        return redirect()->route('checkout')->with('payment_cancelled', true);
     }
 }

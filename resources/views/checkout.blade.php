@@ -296,6 +296,7 @@
 
 
 <div 
+
     :class="{ 'relative z-10 bg-cover bg-center bg-no-repeat pt-[30px] pb-20 md:pt-[100px]': isMobile, 'z-10 relative bacground-image-hero': !isMobile }"
     :style="isMobile ? 'background-image: url({{ asset('/images/v2crop.png') }})' : ''"> 
     <div class="absolute right-0 top-0">
@@ -309,16 +310,19 @@
             @click.outside="dropdownOpen = false"
             class="relative mb-8 inline-block text-left"
             >
+            
             <button
                @click="dropdownOpen = !dropdownOpen"
-               class="bg-dark flex items-center rounded-[5px] px-7 py-[7px] text-sm font-medium text-white"
+               class="bg-dark flex items-center rounded-[15px] py-[12px] text-sm font-medium text-white"
                >
-               
-                {{ $user->name }}
-               <span class="pl-4">
+               <svg class="h=4 w-4 ml-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="white"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+
+               <span class="pl-1 pr-1"> {{ $user->name }}</span>
+               <span>
                   <svg 
-                     width="20" 
-                     height="20" 
+            
+                     width="15" 
+                     height="15" 
                      viewBox="0 0 20 20" 
                      fill="none" 
                      xmlns="http://www.w3.org/2000/svg"
@@ -357,7 +361,7 @@
     </div>
 </div>
 
-<section class="relative z-40 py-10 lg:py-[40px] dark:bg-[#011523]"  x-data="{
+<section class="relative py-10 lg:py-[40px] dark:bg-[#011523]"  x-data="{
    isMobile2: window.innerWidth <= 640,
    sendInvoice: true,  
    thruPhoneProcess: false
@@ -677,7 +681,7 @@ x-init="() => {
       <div @click.outside="thruPhoneProcess = false" class="relative mx-auto max-w-[660px]
       bg-white dark:bg-dark-2 shadow-1 dark:shadow-3 h-[95vh]">
          <div class="p-8 bg-white dark:bg-dark-2 rounded-[10px] ">
-            <button @click="thruPhoneProcess = false" class="bg-red p-1 absolute right-5 top-5 rounded-[5px] text-white dark:text-dark-6">
+            <button @click="thruPhoneProcess = false" type="button"class="bg-red p-1 absolute right-5 top-5 rounded-[5px] text-white dark:text-dark-6">
                   <svg 
                      width="20" 
                      height="20" 

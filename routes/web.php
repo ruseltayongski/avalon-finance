@@ -31,6 +31,4 @@ Route::post('/email', [App\Http\Controllers\HomeController::class, 'sendEmail'])
 Route::post('/success/mail', [App\Http\Controllers\HomeController::class, 'successMail'])->name('success.email');
 
 Route::get('/stripe/session', [App\Http\Controllers\StripeController::class, 'session'])->name('stripe.session');
-
-
 Route::get('/services/{category}', [App\Http\Controllers\ServicesController::class, 'services'])->name('services.category');
