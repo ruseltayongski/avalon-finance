@@ -594,7 +594,7 @@ x-init="() => {
                               </div>
                            </div>
 
-                           <div class="w-full px-4 md:w-full">
+                           <div class="w-full px-4 md:w-full hidden" id="promoComponent">
                               <div class="mb-8">
                                  <label
                                     for=""
@@ -906,6 +906,7 @@ x-init="() => {
    var totalAmountSpan = document.getElementById('totalAmountSpan');
    var totalAmountInput = document.getElementById('totalAmountInput');
    var totalAmount = 0;
+   var promoComponent = document.getElementById("promoComponent");
 
    function calculateTotalAmount(e, option) {
       if(option == 'add') {
@@ -931,6 +932,7 @@ x-init="() => {
    }
 
    function displayTheSummary(e) {
+      promoComponent.classList.remove("hidden");
       var tempDiv = document.createElement('div');
       tempDiv.innerHTML = `<div data-id="${e.value}" class="flex items-center mb-9">
                               <div class="mr-6 h-[90px] w-full max-w-[80px] overflow-hidden rounded-lg sm:h-[110px] sm:max-w-[100px] border border-stroke dark:border-dark-3">
@@ -955,6 +957,9 @@ x-init="() => {
    function deleteSummaryById(e) {
       var summaryElement = Array.from(summaryDetails.children).find(element => element.getAttribute('data-id') == e.value);
       summaryDetails.removeChild(summaryElement);
+      if(Array.from(summaryDetails.children).length < 1) {
+         promoComponent.classList.add("hidden");
+      }
    }
 
    function MultiSelectTag(e, t = { shadow: !1, rounded: !0 }) {
