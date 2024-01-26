@@ -34,6 +34,8 @@ class StripeController extends Controller
             'duration' => 'once',
         ]);
 
+       /*  return $coupon; */
+
         $line_items = [];
         foreach (json_decode($request->services, true) as $row) {
             $price = (float)str_replace(',', '', strval($row['price'])) * 100; // Convert to cents
@@ -52,7 +54,7 @@ class StripeController extends Controller
         $session = [
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => route('welcome'),
+            'success_url' =>'https://avalonhouse.us/',
             'cancel_url' => route('checkout')
         ];
 

@@ -51,12 +51,26 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) 
     {
+     
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $user = Auth::user();
-    
         $selectedServices = Services::whereIn("id", $request->services)->get();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["sendInvoice"])) {
-             
+
+                $discount = 0;
+                if ($request->promoCode) {
+                    foreach ($request->promoCode as $row) {
+                        $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                    }
+                }
+                
+                $coupon = \Stripe\Coupon::create([
+                    'amount_off' => $discount * 100,
+                    'currency' => 'usd',
+                    'duration' => 'once',
+                ]);
+
                 $customer = new Customer();
                 $customer->processed_by = $user->id;
                 $customer->fullname = $request->fullName;
@@ -75,36 +89,54 @@ class HomeController extends Controller
                 $email = $request->input('email1'); 
                 $ccEmail = "ruseltayong@gmail.com";
                 $customer->save();
-        
+    
                 $mailData = $request->all();
-                Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices));
+ 
+                Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
+          /*    dispatch(new SendInvoice($email, $ccEmail,$mailData, $selectedServices, $coupon)); */
                 return redirect()->back()->with('message', 'Invoice sent successfully!');
             } 
             elseif (isset($_POST["proceedButton"])) {
+                $discount = 0;
+                if ($request->promoCode) {
+                    foreach ($request->promoCode as $row) {
+                        $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                    }
+                }
+        
+                $coupon = \Stripe\Coupon::create([
+                    'amount_off' => $discount * 100,
+                    'currency' => 'usd',
+                    'duration' => 'once',
+                ]);
+
+                $line_items = [];
                 foreach ($selectedServices as $row) {
+                    $price = (float)str_replace(',', '', strval($row['price'])) * 100;
                     $line_items[] = [
                         'price_data' => [
-                            'currency'     => 'USD',
+                            'currency' => 'USD',
                             'product_data' => [
                                 'name' => ucfirst($row['title']),
                             ],
-                            'unit_amount'  => (float)str_replace(',', '', strval($row['price'])) * 100,
+                            'unit_amount' => $price,
                         ],
-                        'quantity'   => 1,
+                        'quantity' => 1,
                     ];
                 }
+            
+                $session = [
+                    'line_items' => $line_items,
+                    'mode' => 'payment',
+                    'success_url' =>'https://avalonhouse.us/',
+                    'cancel_url' => route('checkout')
+                ];
                 
-                \Stripe\Stripe::setApiKey(config('stripe.sk'));
-                
-                $session = \Stripe\Checkout\Session::create(    
-                    [
-                        'line_items'  => $line_items,
-                        'mode'        => 'payment',
-                        'success_url' => route('welcome'),
-                        'cancel_url'  => route('checkout'),
-                    ]
-                );
-                
+                if($request->promoCode) {
+                    $session['discounts'] = [['coupon' => $coupon->id]];
+                }
+
+                $session = \Stripe\Checkout\Session::create($session);
                 return redirect()->away($session->url)->with('stripe_save', true);
             }
         }
@@ -114,7 +146,7 @@ class HomeController extends Controller
 
         $name = $request->name;
         $email = $request->email;
-        $ccEmail = "ruseltayong@gmail.com";
+        $ccEmail = "trodfil123@gmail.com";
         dispatch(new SuccessPay($email, $ccEmail, $name));
 
         return redirect()->route('checkout')->with('payment_cancelled', true);

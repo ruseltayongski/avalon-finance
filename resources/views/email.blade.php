@@ -43,7 +43,7 @@ Invoice
                 <td style="padding-bottom: 16px;"></td>
             </tr>
             <tr>
-                <td colspan="4" style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">{{ $data['totalAmount']}} {{ date("F j, Y") }}</td>
+                <td colspan="4" style="font-weight: bold; font-size: 22px; padding-bottom: 1rem;">${{ number_format($data['totalAmount'], 2, '.', ',') }} {{ date("F j, Y") }}</td>
             </tr>
             <tr>
                 <td colspan="4">
@@ -104,12 +104,12 @@ Invoice
                     <hr style="border: 1px solid #011523">
                 </td>
             </tr>
-            @foreach ($services as $service)
+            @foreach ($services as $key => $service)
                 <tr>
                     <td style="font-weight: bold; font-size: 17px;">{{ $service->title}}</td>
                     <td style="font-size: 17px;">1</td>
-                    <td style="padding: 0px 0px 0px 51px; font-size: 17px; font-weight: 500">{{ $service->price }}</td>
-                    <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: 500">{{ $service->price }}</td>
+                    <td style="padding: 0px 0px 0px 51px; font-size: 17px; font-weight: 500">${{ number_format($service->price, 2, '.', ',') }}</td>
+                    <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: 500">${{ number_format($service->price, 2, '.', ',') }}</td>
                 </tr>
             @endforeach
             <tr>
@@ -122,7 +122,20 @@ Invoice
                 <td></td>
                 <td style="font-size: 17px; font-weight: 500; padding-bottom: 10px;">Subtotal</td>
                 <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">{{ $data['subTotal']}}</td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">${{ number_format($data['subTotal'], 2, '.', ',') }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3">
+                    <hr style="border: 1px solid #011523; opacity: 0.1;">
+                </td>
+            </tr>
+     
+            <tr>
+                <td></td>
+                <td style="font-size: 17px; font-weight: 500; padding-bottom: 10px;">Discount</td>
+                <td></td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">${{ number_format($coupon['amount_off'] / 100.00, 2, '.', ',') }}</td>
             </tr>
             <tr>
                 <td></td>
@@ -134,7 +147,7 @@ Invoice
                 <td></td>
                 <td style="font-size: 17px;">Total</td>
                 <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">{{ $data['totalAmount']}}</td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">${{ number_format($data['totalAmount'], 2, '.', ',') }}</td>
             </tr>
             <tr>
                 <td></td>
@@ -146,7 +159,7 @@ Invoice
                 <td></td>
                 <td style="font-size: 17px; font-weight: bold;">Amount Due</td>
                 <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: bold;">{{ $data['totalAmount']}}</td>
+                <td style="padding: 0px 0px 0px 89px; font-size: 17px; font-weight: bold;">${{ number_format($data['totalAmount'], 2, '.', ',') }}</td>
             </tr>
 
         </tbody>

@@ -15,13 +15,15 @@ class InvoiceMail extends Mailable
 
     public $mailData;
     public $selectedServices;
+    public $coupon;
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData, $selectedServices)
+    public function __construct($mailData, $selectedServices, $coupon)
     {
         $this->mailData = $mailData;
         $this->selectedServices = $selectedServices;
+        $this->coupon = $coupon;
     }
 
     /**
@@ -43,7 +45,9 @@ class InvoiceMail extends Mailable
             view: 'email',
             with: [
                 'data' => $this->mailData,
-                'services' => $this->selectedServices
+                'services' => $this->selectedServices,
+                'coupon' => $this->coupon,
+
             ] 
         );
     }
