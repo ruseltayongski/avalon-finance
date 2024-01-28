@@ -861,7 +861,7 @@ x-init="() => {
             </svg>
          </div>
          <h3 class="pb-4 text-3xl font-bold text-white md:text-4xl">
-            Congrats!
+            Congratulations!
          </h3>
          <p class="text-base leading-relaxed text-white mb-9">
             You have successfully sent an invoicesss
