@@ -40,6 +40,13 @@ class HomeController extends Controller
     {
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $allCoupons = \Stripe\Coupon::all(['limit' => 99999999])->data;
+
+        foreach ($allCoupons as $coupon) {
+            if ($coupon->duration === 'once') {
+                $coupon->delete();
+            }
+        }
+
         $foreverCoupons = array_filter($allCoupons, function ($coupon) {
             return $coupon->duration === 'forever';
         });
