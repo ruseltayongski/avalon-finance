@@ -864,7 +864,7 @@ x-init="() => {
             Congratulations!
          </h3>
          <p class="text-base leading-relaxed text-white mb-9">
-            You have successfully sent an invoicesss
+            You have successfully sent an invoice.
          </p>
         {{--  <a
             @click="sendInvoice = false"
