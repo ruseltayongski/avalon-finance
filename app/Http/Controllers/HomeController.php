@@ -92,8 +92,8 @@ class HomeController extends Controller
     
                 $mailData = $request->all();
  
-                Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
-          /*    dispatch(new SendInvoice($email, $ccEmail,$mailData, $selectedServices, $coupon)); */
+                /* Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon)); */
+             dispatch(new SendInvoice($email, $ccEmail,$mailData, $selectedServices, $coupon));
                 return redirect()->back()->with('message', 'Invoice sent successfully!');
             } 
             elseif (isset($_POST["proceedButton"])) {
