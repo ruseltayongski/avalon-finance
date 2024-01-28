@@ -23,10 +23,10 @@ class SendInvoice implements ShouldQueue
     protected $ccEmail;
     protected $selectedServices;
     protected $coupon;
-    public function __construct($email, $ccEmail, $mailData, $selectedServices, $coupon)
+    public function __construct($mailData, $ccEmail, $selectedServices, $coupon)
     {
-        $this->email = $email;
         $this->mailData = $mailData;
+        $this->email = $mailData['email1'] ?? null;
         $this->ccEmail = $ccEmail;
         $this->selectedServices = $selectedServices;
         $this->coupon = $coupon;

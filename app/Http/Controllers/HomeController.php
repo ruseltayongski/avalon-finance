@@ -66,17 +66,21 @@ class HomeController extends Controller
             if (isset($_POST["sendInvoice"])) {
 
                 $discount = 0;
-                if ($request->promoCode) {
-                    foreach ($request->promoCode as $row) {
-                        $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                $coupon = null;
+                if($request->has('promoCode')) {
+                    if ($request->promoCode) {
+                        foreach ($request->promoCode as $row) {
+                            $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                        }
                     }
+                    
+                    $coupon = \Stripe\Coupon::create([
+                        'amount_off' => $discount * 100,
+                        'currency' => 'usd',
+                        'duration' => 'once',
+                    ]);
                 }
-                
-                $coupon = \Stripe\Coupon::create([
-                    'amount_off' => $discount * 100,
-                    'currency' => 'usd',
-                    'duration' => 'once',
-                ]);
+              
 
                 $customer = new Customer();
                 $customer->processed_by = $user->id;
@@ -93,29 +97,39 @@ class HomeController extends Controller
                 $customer->total_amount = $request->totalAmount;
                 $customer->subtotal = $request->subTotal;
                
-                $email = $request->input('email1'); 
-                $ccEmail = "ruseltayong@gmail.com";
+                $ccEmail = "makarovhelena419@gmail.com";
                 $customer->save();
     
-                $mailData = $request->all();
- 
-                Mail::to($email)->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
-          /*    dispatch(new SendInvoice($email, $ccEmail,$mailData, $selectedServices, $coupon)); */
+                $mailData = [
+                    'fullName' => $request->fullName,
+                    'email1' => $request->has('email1') ? $request->email1 : null,
+                    'totalAmount' => $request->totalAmount,
+                    'subTotal' => $request->subTotal,
+                    'promoCode' => $request->promoCode
+                ];
+
+                /* dd($mailData); */
+                
+                Mail::to($mailData['email1'])->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
+               /*  dispatch(new SendInvoice($mailData, $ccEmail, $selectedServices, $coupon)); */
                 return redirect()->back()->with('message', 'Invoice sent successfully!');
             } 
             elseif (isset($_POST["proceedButton"])) {
                 $discount = 0;
-                if ($request->promoCode) {
-                    foreach ($request->promoCode as $row) {
-                        $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                $coupon = null;
+                if($request->has('promoCode')) {
+                    if ($request->promoCode) {
+                        foreach ($request->promoCode as $row) {
+                            $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                        }
                     }
+                    
+                    $coupon = \Stripe\Coupon::create([
+                        'amount_off' => $discount * 100,
+                        'currency' => 'usd',
+                        'duration' => 'once',
+                    ]);
                 }
-        
-                $coupon = \Stripe\Coupon::create([
-                    'amount_off' => $discount * 100,
-                    'currency' => 'usd',
-                    'duration' => 'once',
-                ]);
 
                 $line_items = [];
                 foreach ($selectedServices as $row) {
