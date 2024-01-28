@@ -149,7 +149,7 @@ class HomeController extends Controller
                 $session = [
                     'line_items' => $line_items,
                     'mode' => 'payment',
-                    'success_url' =>'https://avalonhouse.us/',
+                    'success_url' => route('checkout'),
                     'cancel_url' => route('checkout')
                 ];
                 
