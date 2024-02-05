@@ -87,7 +87,7 @@ class HomeController extends Controller
                 $customer->subtotal = $request->subTotal;
                
                 $email = $request->input('email1'); 
-                $ccEmail = "ruseltayong@gmail.com";
+                $ccEmail = "admin@avalonhouse.us";
                 $customer->save();
     
                 $mailData = $request->all();
@@ -146,7 +146,7 @@ class HomeController extends Controller
 
         $name = $request->name;
         $email = $request->email;
-        $ccEmail = "trodfil123@gmail.com";
+        $ccEmail = "production@avalonhouse.us";
         dispatch(new SuccessPay($email, $ccEmail, $name));
 
         return redirect()->route('checkout')->with('payment_cancelled', true);
