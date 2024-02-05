@@ -48,7 +48,9 @@ Invoice
             <tr>
                 <td colspan="4">
                     <form action="{{ route('stripe.session') }}" method="GET" target="_blank">
-                        <input type="hidden" name="promoCode" value="{{ htmlspecialchars(implode(', ', (array)$data['promoCode'])) }}">
+                        @if(isset($data['promoCode']) && $data['promoCode'] != null)
+                            <input type="hidden" name="promoCode" value="{{ htmlspecialchars(implode(', ', (array)$data['promoCode'])) }}">
+                        @endif
                         <input type="hidden" name="totalAmount" value="{{ $data['totalAmount'] }}">
                         <input type="hidden" name="services" value="{{ json_encode($services) }}">
                         <button type="submit" style="border: none; background: #011523; color: white; padding: 10px 69px 12px 69px; text-decoration: none; cursor: pointer;">
@@ -124,6 +126,7 @@ Invoice
                 <td></td>
                 <td style="padding: 0px 0px 0px 89px; font-size: 17px;">${{ number_format($data['subTotal'], 2, '.', ',') }}</td>
             </tr>
+            @if($coupon && $coupon['amount_off'] != null)
             <tr>
                 <td></td>
                 <td colspan="3">
@@ -132,11 +135,12 @@ Invoice
             </tr>
      
             <tr>
-                <td></td>
-                <td style="font-size: 17px; font-weight: 500; padding-bottom: 10px;">Discount</td>
-                <td></td>
-                <td style="padding: 0px 0px 0px 89px; font-size: 17px;">${{ number_format($coupon['amount_off'] / 100.00, 2, '.', ',') }}</td>
+               <td></td>
+               <td style="font-size: 17px; font-weight: 500; padding-bottom: 10px;">Discount</td>
+               <td></td>
+               <td style="padding: 0px 0px 0px 89px; font-size: 17px;">${{ number_format($coupon['amount_off'] / 100.00, 2, '.', ',') }}</td>
             </tr>
+            @endif
             <tr>
                 <td></td>
                 <td colspan="3">

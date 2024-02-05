@@ -7,6 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" type="x-icon" href="https://avalonhouse.us/images/avalon-logo.png">
     <title>{{ config('app.name', 'Avalon Finance') }}</title>
 
     <!-- Scripts -->

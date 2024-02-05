@@ -864,15 +864,15 @@ x-init="() => {
             Congratulations!
          </h3>
          <p class="text-base leading-relaxed text-white mb-9">
-            You have successfully sent an invoice
+            You have successfully sent an invoice.
          </p>
-         <a
+        {{--  <a
             @click="sendInvoice = false"
             class="inline-block rounded-md border border-white py-3 px-[50px] text-center text-base font-medium text-white transition hover:bg-white hover:text-primary"
             >
           Send Notif to Email
-         </a>
-        {{--  <button
+         </a> --}}
+         <button
             @click="sendInvoice = false"
             class="absolute flex items-center justify-center text-white transition bg-white rounded-full top-6 right-6 h-7 w-7 bg-opacity-10 hover:bg-opacity-100 hover:text-primary"
             >
@@ -888,7 +888,7 @@ x-init="() => {
                   class="fill-current stroke-current"
                   />
             </svg>
-         </button> --}}
+         </button>
       </div>
   </div>
    @endif

@@ -19,20 +19,23 @@ class StripeController extends Controller
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
         $promoCode = [];
         $discount = 0;
-        if($request->promoCode) {
-            foreach(explode(",", $request->promoCode) as $row) {
-                // $promoCode[] = [
-                //     "coupon" => str_replace(" ", "", $row)
-                // ];
-                $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+        $coupon = null;
+        if($request->has('promoCode')) {
+            if($request->promoCode) {
+                foreach(explode(",", $request->promoCode) as $row) {
+                    // $promoCode[] = [
+                    //     "coupon" => str_replace(" ", "", $row)
+                    // ];
+                    $discount += (float)\Stripe\Coupon::retrieve(str_replace(" ", "", $row))->amount_off / 100;
+                }
             }
+    
+            $coupon = \Stripe\Coupon::create([
+                'amount_off' => $discount * 100,
+                'currency' => 'usd',
+                'duration' => 'once',
+            ]);
         }
-
-        $coupon = \Stripe\Coupon::create([
-            'amount_off' => $discount * 100,
-            'currency' => 'usd',
-            'duration' => 'once',
-        ]);
 
        /*  return $coupon; */
 
