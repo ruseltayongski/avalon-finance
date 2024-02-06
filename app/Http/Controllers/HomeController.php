@@ -98,7 +98,12 @@ class HomeController extends Controller
                 $customer->subtotal = $request->subTotal;
                
                 $email = $request->input('email1'); 
-                $ccEmail = "production@avalonhouse.us";
+                $ccEmails = [
+                    "production@avalonhouse.us",
+                    "info@avalonhouse.us"
+
+                ];
+    
                 $customer->save();
     
                 $mailData = [
@@ -111,7 +116,7 @@ class HomeController extends Controller
 
                 /* dd($mailData); */
                 
-                Mail::to($mailData['email1'])->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
+                Mail::to($mailData['email1'])->cc($ccEmails)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
                /*  dispatch(new SendInvoice($mailData, $ccEmail, $selectedServices, $coupon)); */
                 return redirect()->back()->with('message', 'Invoice sent successfully!');
             } 
