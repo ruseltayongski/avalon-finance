@@ -1,15 +1,15 @@
 <?php 
-  function generateInvoiceNumber($counter) {
+
+  function generateInvoiceNumber($id) {
     $year = date("y");
     $month = date("m");
     $day = date("d");
-    $invoiceNumber = sprintf("%03d%s%02d%s%02d%s", $counter, 'A', $month, 'H', $day, $year);
+    $invoiceNumber = sprintf("%03d%s%02d%s%02d%s", $id, 'A', $month, 'H', $day, $year);
 
     return $invoiceNumber;
 }
-
-$counter = 1;
-$invoiceNumber = generateInvoiceNumber($counter);
+$id = $data['id'];
+$invoiceNumber = generateInvoiceNumber($id);
 
 ?>
 

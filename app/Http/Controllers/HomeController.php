@@ -107,6 +107,7 @@ class HomeController extends Controller
                 $customer->save();
     
                 $mailData = [
+                    'id' => $customer->id,
                     'fullName' => $request->fullName,
                     'email1' => $request->has('email1') ? $request->email1 : null,
                     'totalAmount' => $request->totalAmount,
@@ -114,7 +115,7 @@ class HomeController extends Controller
                     'promoCode' => $request->promoCode
                 ];
 
-                /* dd($mailData); */
+               /*  dd($mailData); */
                 
                 Mail::to($mailData['email1'])->cc($ccEmails)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
                /*  dispatch(new SendInvoice($mailData, $ccEmail, $selectedServices, $coupon)); */
