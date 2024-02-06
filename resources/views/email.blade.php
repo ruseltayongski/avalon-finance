@@ -1,3 +1,18 @@
+<?php 
+
+  function generateInvoiceNumber($id) {
+    $year = date("y");
+    $month = date("m");
+    $day = date("d");
+    $invoiceNumber = sprintf("%03d%s%02d%s%02d%s", $id, 'A', $month, 'H', $day, $year);
+
+    return $invoiceNumber;
+}
+$id = $data['id'];
+$invoiceNumber = generateInvoiceNumber($id);
+
+?>
+
 <html>
 
 Invoice
@@ -17,7 +32,7 @@ Invoice
         </thead>    
         <tbody>
             <tr>
-                <td colspan="4" style="padding: 0px 0px 0px; font-size: 14px; font-weight: bold;"><span>Invoice number 2632132132</span></td>
+                <td colspan="4" style="padding: 0px 0px 0px; font-size: 14px; font-weight: bold;"><span>Invoice number <?php echo $invoiceNumber; ?></span></td>
             </tr>
 
             <tr>
@@ -202,7 +217,7 @@ Invoice
             </tr>
             <tr>
                 <td colspan="4" style="padding-top: 7px;"> 
-                    <span style="font-size: 14px; font-weight: 500;">26B34523-DRAFT $48.99 due February 5, 2022</span>
+                    <span style="font-size: 14px; font-weight: 500;"><?php echo $invoiceNumber; ?>-DRAFT ${{number_format($data['totalAmount'], 2, '.', ',') }} {{ date("F j, Y") }}</span>
                 </td>
             </tr>
         </tfooter>

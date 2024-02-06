@@ -98,11 +98,16 @@ class HomeController extends Controller
                 $customer->subtotal = $request->subTotal;
                
                 $email = $request->input('email1'); 
-                $ccEmail = "production@avalonhouse.us";
-                $ccEmail = "info@avalonhouse.us";
+                $ccEmails = [
+                    "production@avalonhouse.us",
+                    "info@avalonhouse.us"
+
+                ];
+    
                 $customer->save();
     
                 $mailData = [
+                    'id' => $customer->id,
                     'fullName' => $request->fullName,
                     'email1' => $request->has('email1') ? $request->email1 : null,
                     'totalAmount' => $request->totalAmount,
@@ -110,9 +115,9 @@ class HomeController extends Controller
                     'promoCode' => $request->promoCode
                 ];
 
-                /* dd($mailData); */
+               /*  dd($mailData); */
                 
-                Mail::to($mailData['email1'])->cc($ccEmail)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
+                Mail::to($mailData['email1'])->cc($ccEmails)->send(new InvoiceMail($mailData, $selectedServices, $coupon));
                /*  dispatch(new SendInvoice($mailData, $ccEmail, $selectedServices, $coupon)); */
                 return redirect()->back()->with('message', 'Invoice sent successfully!');
             } 
