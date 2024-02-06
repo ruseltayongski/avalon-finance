@@ -99,6 +99,7 @@ class HomeController extends Controller
                
                 $email = $request->input('email1'); 
                 $ccEmail = "production@avalonhouse.us";
+                $ccEmail = "info@avalonhouse.us";
                 $customer->save();
     
                 $mailData = [
