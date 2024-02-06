@@ -98,7 +98,7 @@ class HomeController extends Controller
                 $customer->subtotal = $request->subTotal;
                
                 $email = $request->input('email1'); 
-                $ccEmail = "admin@avalonhouse.us";
+                $ccEmail = "production@avalonhouse.us";
                 $customer->save();
     
                 $mailData = [

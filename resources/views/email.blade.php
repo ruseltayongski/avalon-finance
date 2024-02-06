@@ -25,7 +25,7 @@ Invoice
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="margin-right: 8rem; font-weight: bold; font-size: 15px;"><span>Stripe Shop</span></td>
+                <td colspan="2" style="margin-right: 8rem; font-weight: bold; font-size: 15px;"><span>Avalon House</span></td>
              
                 <td style="font-weight: bold; font-size: 15px;"><span>Bill to</span></td>
             </tr>
