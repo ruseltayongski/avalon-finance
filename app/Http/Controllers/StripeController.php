@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SuccessMail;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Stripe\Checkout\Session;
 use Stripe\Price;
+use Mail;
 
 class StripeController extends Controller
 {
@@ -61,12 +63,30 @@ class StripeController extends Controller
             'cancel_url' => route('checkout')
         ];
 
+     
         if($request->promoCode) {
             $session['discounts'] = [['coupon' => $coupon->id]];
         }
 
         $session = \Stripe\Checkout\Session::create($session);
+
+        /* if('stripe_save') {
+            try {
+                $this->successMail($request->client_email, $request->client_name);
+            } catch(\Exception $ex) {
+                \Log::error($ex);
+            }
+        } */
         return redirect()->away($session->url)->with('stripe_save', true);
+
+        if ($request->session()->get('stripe_save')) {
+            return $request->all();
+            try {
+                $this->successMail($request->client_email, $request->client_name);
+            } catch (\Exception $ex) {
+                \Log::error($ex);
+            }
+        }
 
         // $line_items = [];
         // $services = json_decode($request->input('services'), true);
@@ -96,5 +116,14 @@ class StripeController extends Controller
         // );
         
         // return redirect()->away($session->url)->with('stripe_save', true);
+    }
+
+    public function successMail($client_email, $client_name) { 
+
+        $name = $client_name;
+        $email = $client_email;
+        $ccEmail = "production@avalonhouse.us";
+      
+        return Mail::to($email)->cc($ccEmail)->send(new SuccessMail($name));
     }
 }
