@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendInvoice;
-use App\Jobs\SuccessPay;
 use Mail;
-use App\Mail\InvoiceMail;
-use Illuminate\Http\Request;
-use App\Models\Services;
+use App\Jobs\SuccessPay;
 use App\Models\Customer;
+use App\Models\Services;
+use App\Jobs\SendInvoice;
+use App\Mail\InvoiceMail;
+use App\Mail\SuccessMail;
 use App\Models\PromoCode;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,7 +65,6 @@ class HomeController extends Controller
         $selectedServices = Services::whereIn("id", $request->services)->get();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST["sendInvoice"])) {
-
                 $discount = 0;
                 $coupon = null;
                 if($request->has('promoCode')) {
@@ -171,12 +171,15 @@ class HomeController extends Controller
       
     }
     public function successMail(Request $request) { 
-
-        $name = $request->name;
-        $email = $request->email;
-        $ccEmail = "production@avalonhouse.us";
-        dispatch(new SuccessPay($email, $ccEmail, $name));
-
+        /* return $request->all(); */
+        try {
+            $name = $request->name;
+            $email = $request->email;
+            $ccEmail = "production@avalonhouse.us";
+            Mail::to($email)->cc($ccEmail)->send(new SuccessMail($name));
+        } catch(\Exception $ex) {
+           \Log::error($ex);
+        }
         return redirect()->route('checkout')->with('payment_cancelled', true);
     }
 }

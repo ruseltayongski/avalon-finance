@@ -1,5 +1,4 @@
 <?php 
-
   function generateInvoiceNumber($id) {
     $year = date("y");
     $month = date("m");
@@ -67,6 +66,8 @@ Invoice
                             <input type="hidden" name="promoCode" value="{{ htmlspecialchars(implode(', ', (array)$data['promoCode'])) }}">
                         @endif
                         <input type="hidden" name="totalAmount" value="{{ $data['totalAmount'] }}">
+                        <input type="hidden" name="client_email" value="{{ $data['email1'] }}">
+                        <input type="hidden" name="client_name" value="{{ $data['fullName'] }}">
                         <input type="hidden" name="services" value="{{ json_encode($services) }}">
                         <button type="submit" style="border: none; background: #011523; color: white; padding: 10px 69px 12px 69px; text-decoration: none; cursor: pointer;">
                             <span>Pay Online</span>
@@ -223,5 +224,4 @@ Invoice
         </tfooter>
     </table>
 </body>
-
 </html>
