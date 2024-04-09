@@ -197,22 +197,22 @@ Invoice
             </tr>
             <tr>
                 <td colspan="4" style="padding-top: 7px;">
-                    <span style="font-size: 14px; font-weight: 500;">Bank Name ___</span>
+                    <span style="font-size: 14px; font-weight: 500;">Bank Name: Jpmorgan Chase Bank</span>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <span style="font-size: 14px; font-weight: 500;">Routing number ___</span>
+                    <span style="font-size: 14px; font-weight: 500;">Routing number: 071000013</span>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <span style="font-size: 14px; font-weight: 500;">Account number ___</span>
+                    <span style="font-size: 14px; font-weight: 500;">Account number: 595318158</span>
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <span style="font-size: 14px; font-weight: 500;">Swift code ___</span>
+                    <span style="font-size: 14px; font-weight: 500;">Swift code: CHASUS33</span>
                 </td>
             </tr>
             <tr>
