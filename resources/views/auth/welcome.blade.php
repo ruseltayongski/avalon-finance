@@ -221,7 +221,7 @@
                            class="mx-auto inline-block max-w-[160px]"
                            >
                         <img
-                           src="https://avalonhouse.us/images/avalon-logo.png"
+                           src="{{ asset('images/avalon-logo.png')}}"
                            alt="logo"
                            />
                         </a>

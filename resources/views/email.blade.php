@@ -25,7 +25,7 @@ Invoice
                 <th></th>
                 <th></th>
                 <th style="text-align:right;">
-                    <img style="max-width: 68px;" src="https://avalonhouse.us/images/avalon-logo.png" alt="bachana tours">
+                    <img style="max-width: 68px;" src="{{ asset('images/avalon-logo.png')}}" alt="bachana tours">
                 </th>
             </tr>
         </thead>    
